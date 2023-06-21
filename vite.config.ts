@@ -78,32 +78,13 @@ export default defineConfig(() => {
             preprocessorOptions: {
                 less: {
                     charset: false,
-                    additionalData: '@import "./src/styles/presetvalue.less";',
+                    additionalData: '@import "./src/styles/index.less";',
                 },
             },
         },
         server: {
             host: '0.0.0.0',
             port: 8080,
-            proxy: {
-                '/api/zklogs': {
-                    target: 'http://192.168.3.107:9001',
-                    rewrite: path => path.replace(/^\/api/, ''),
-                },
-                // '/ws': {
-                //     // example: ws://192.168.3.107:9001/ws?id=1&token=2&key=zklogs
-                //     // target: 'ws://192.168.3.107:9001/ws?id=1&token=2&key=zklogs',
-                //     rewrite: path => path.replace(/^\/ws/, 'dd'),
-                // },
-                '/api': {
-                    target: 'http://192.168.3.107',
-                    // changeOrigin: true,
-                    // rewrite: (path) => path.replace(/^\/api/, ''),
-                },
-                '/images': {
-                    target: 'http://192.168.3.107/map/images',
-                },
-            },
         },
         build: {
             sourcemap: true,

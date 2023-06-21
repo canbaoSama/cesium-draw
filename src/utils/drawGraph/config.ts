@@ -4,8 +4,8 @@ import { DRAW_GRAPH_MAP } from '@/constants/cesium'
 
 export const drawConfig = {
     layerId: 'globeDrawerLayer',
-    dragIconLight: '/src/assets/images/icons/circle_point_icon.svg', // 绘制时的红点
-    dragIcon: '/src/assets/images/icons/point_icon.svg', // 绘制时的灰点
+    dragIconLight: '/src/assets/images/circle_point_icon.svg', // 绘制时的红点
+    dragIcon: '/src/assets/images/point_icon.svg', // 绘制时的灰点
     fill: true,
     outline: true,
     outlineWidth: 2,

@@ -6,23 +6,11 @@ import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 
 import type { DrawEntity, configInterface } from '@/types/cesiumDraw'
-import { DRAW_GRAPH_MAP, LAYER_CONTROL_TYPE } from '@/constants/cesium'
-import { useCesiumStore } from '@/store/cesium'
+import { DRAW_GRAPH_MAP } from '@/constants/cesium'
 import { OPERATE_STATUS } from '@/constants/index'
-import { drawConfig } from '@/utils/cesium/drawGraph/config'
+import { drawConfig } from '@/utils/drawGraph/config'
+import cesiumStore from '@/pages/index'
 
-const cesiumStore = useCesiumStore()
-
-const drawing: Ref<boolean> = ref(false)
-// 进入绘制状态,进入后关闭其他相关图层,避免互相影响并且保证性能
-function enterDrawGraphLayer() {
-    if (drawing.value) // 退出绘制
-        cesiumStore.drawLayer(LAYER_CONTROL_TYPE.EXIT_DRAW)
-    else // 开始绘制
-        cesiumStore.drawLayer(LAYER_CONTROL_TYPE.DRAW)
-
-    drawing.value = !drawing.value
-}
 const drawingType = ref('')
 
 let handler: ScreenSpaceEventHandler | undefined
@@ -32,8 +20,6 @@ const drawedShape: { [key: string | number]: any } = {}
 
 // 进入或者切换绘制状态,开始绘制
 function enterDrawStatus(type: string, flagType?: string) {
-    if (!drawing.value)
-        return
     exitOperateStatus()
 
     if (flagType)
@@ -44,15 +30,13 @@ function enterDrawStatus(type: string, flagType?: string) {
     drawingType.value = type
     cesiumStore.DrawGraphType(type)
     if (type) {
-        cesiumStore.drawGraph.dialogVisible = dialogVisible
-        cesiumStore.drawGraph?.startDraw()
+        cesiumStore.drawGraph.value.dialogVisible = dialogVisible
+        cesiumStore.drawGraph.value?.startDraw()
     }
 }
 
 // 选择图形移除
 function removeDrawGraph() {
-    if (!drawing.value)
-        return
     ElMessage({
         message: '点击图形进行删除!',
         duration: 5000,
@@ -65,8 +49,6 @@ function removeDrawGraph() {
 }
 // 选择图形进入编辑状态
 function editDrawGraph() {
-    if (!drawing.value)
-        return
     ElMessage({
         message: '点击图形进行编辑!',
         duration: 5000,
@@ -79,9 +61,10 @@ function editDrawGraph() {
 }
 // 给绘制的图形绑定点击事件
 function bindGloveEvent() {
-    handler = new ScreenSpaceEventHandler(cesiumStore.viewer.scene.canvas)
+    const canvas: HTMLCanvasElement | any = cesiumStore.viewer.value.scene.canvas
+    handler = new ScreenSpaceEventHandler(canvas)
     handler.setInputAction((movement: any) => {
-        const pick = cesiumStore.viewer.scene.pick(movement.position)
+        const pick = cesiumStore.viewer.value.scene.pick(movement.position)
         if (defined(pick)) {
             const obj = pick?.id
             if (!obj || !obj.layerId || flag.value === OPERATE_STATUS.NONE)
@@ -95,14 +78,14 @@ function bindGloveEvent() {
     }, ScreenSpaceEventType.LEFT_CLICK)
 }
 function clearEntityById(objId: number) {
-    const entityList = cesiumStore.viewer.entities.values
+    const entityList = cesiumStore.viewer.value.entities.values
     if (!entityList || entityList.length < 1)
         return
 
     for (let i = 0; i < entityList.length; i++) {
         const entity: DrawEntity = entityList[i]
         if (entity.layerId === drawConfig.layerId && entity.objId === objId) {
-            cesiumStore.viewer.entities.remove(entity)
+            cesiumStore.viewer.value.entities.remove(entity)
             i--
         }
     }
@@ -111,21 +94,21 @@ function enterDrawEditing(objId: number, drawType: string) {
     // 先移除entity
     clearEntityById(objId)
     enterDrawStatus(drawType)
-    cesiumStore.drawGraph?.reEnterModify(drawedShape[objId], objId)
+    cesiumStore.drawGraph.value.reEnterModify(drawedShape[objId], objId)
 }
 // 保存绘制,将锚点和监听清除
 function saveDrawGraph() {
-    const saveData = cesiumStore.drawGraph.saveDraw()
+    const saveData = cesiumStore.drawGraph.value.saveDraw()
     if (saveData)
-        drawedShape[cesiumStore.drawGraph?.objId] = saveData
+        drawedShape[cesiumStore.drawGraph.value?.objId] = saveData
 
     enterDrawStatus('', OPERATE_STATUS.NONE)
 }
 // 取消绘制,则移除当前正在绘制的数据
 function cancelDrawGraph() {
-    cesiumStore.drawGraph?.clearDrawing()
+    cesiumStore.drawGraph.value?.clearDrawing()
     if (flag.value === OPERATE_STATUS.EDIT) // 编辑状态需要重新绘制旧图形
-        cesiumStore.drawGraph?.drawOldData()
+        cesiumStore.drawGraph.value?.drawOldData()
     enterDrawStatus('', OPERATE_STATUS.NONE)
 }
 // 退出当前操作状态
@@ -166,35 +149,23 @@ function dialogVisible(isOpen: boolean) {
 // 保存配置的信息并传入绘制 class
 async function saveConfig() {
     await configFormRef.value?.validate()
-    cesiumStore.drawGraph?.saveConfig(config.value)
+    cesiumStore.drawGraph.value?.saveConfig(config.value)
     dialogVisible(false)
 }
 </script>
 
 <template>
     <div class="draw-graph absolute right-5 top-15 px-3 py-2 rounded-1 shadow-gray-4 z-1 max-w-94">
-        <div class="header-btns border-0 border-b-1 border-solid border-grayColor-3 pb-2 flex justify-between">
-            <div class="left-btns">
-                <ElPopconfirm confirm-button-text="确定" width="420" cancel-button-text="取消" :title="drawing ? '退出绘制状态不会保留未保存的绘制记录,请确认是否退出?' : '进入绘制状态会暂时关闭一些图层,请确认是否开始绘制?'" @confirm="enterDrawGraphLayer">
-                    <template #reference>
-                        <ElButton class="public-cesium-btn" :class="drawing ? 'active' : ''">
-                            {{ `${drawing ? '退出' : '开始'}绘制` }}
-                        </ElButton>
-                    </template>
-                </ElPopconfirm>
-            </div>
-
-            <div class="right-btns">
-                <ElButton class="public-cesium-btn" :class="`${flag === OPERATE_STATUS.EDIT ? 'active' : ''} ${drawing ? '' : 'undrawing'}`" @click="editDrawGraph">
-                    编辑图形
-                </ElButton>
-                <ElButton class="public-cesium-btn" :class="`${flag === OPERATE_STATUS.DELETE ? 'active' : ''} ${drawing ? '' : 'undrawing'}`" @click="removeDrawGraph">
-                    删除图形
-                </ElButton>
-            </div>
+        <div class="header-btns border-0 border-b-1 border-solid border-grayColor-3 pb-2 flex justify-end">
+            <ElButton class="public-cesium-btn" :class="`${flag === OPERATE_STATUS.EDIT ? 'active' : ''}`" @click="editDrawGraph">
+                编辑图形
+            </ElButton>
+            <ElButton class="public-cesium-btn" :class="`${flag === OPERATE_STATUS.DELETE ? 'active' : ''}`" @click="removeDrawGraph">
+                删除图形
+            </ElButton>
         </div>
         <div class="control-btns flex  flex-wrap justify-between">
-            <ElButton v-for="(item, key) in DRAW_GRAPH_MAP" :key="key" class="public-cesium-btn" :class="`${drawingType === item.key ? 'active' : ''} ${drawing ? '' : 'undrawing'}`"
+            <ElButton v-for="(item, key) in DRAW_GRAPH_MAP" :key="key" class="public-cesium-btn" :class="`${drawingType === item.key ? 'active' : ''}`"
                 @click="enterDrawStatus(item.key, OPERATE_STATUS.NONE)">
                 {{ `${item.name}` }}
             </ElButton>
@@ -244,11 +215,6 @@ async function saveConfig() {
     padding: 0 16px;
     margin: 8px 4px;
     border-radius: 4px;
-}
-
-.undrawing {
-    opacity: 0.5;
-    cursor: not-allowed;
 }
 </style>
 

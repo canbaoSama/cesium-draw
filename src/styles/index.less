@@ -1,6 +1,13 @@
-@import url(presetvalue.less);
-@import url(public.less);
-@import url(element_ui.less);
+@blueColor: #4989e5; // 公共按钮颜色
+
+@grayColor: #303336; // 地图按钮背景色
+@grayColor_2: #444; // 地图按钮border颜色
+
+@blackColor_0_3: rgba(0, 0, 0, 0.3); // 浮层颜色
+@whiteColor_0_3: rgba(255, 255, 255, 0.3);
+
+@waterColor: #73c9c4; // 水色，infowindow 的 shadow 颜色
+@lightYellow: #e6a23c;
 
 html {
     width: 100%;
@@ -25,4 +32,77 @@ li {
 #app {
     height: 100vh;
     width: auto;
+}
+
+.public-cesium-btn {
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 14%;
+    background: @grayColor;
+    border: 1px solid @grayColor_2;
+
+    &.default {
+        background-color: transparent;
+        border: none;
+
+        &:active,
+        &:focus {
+            background-color: transparent;
+            border: none;
+        }
+    }
+
+    &:active,
+    &:focus {
+        background: @grayColor;
+        border: 1px solid @grayColor_2;
+    }
+
+    &.active,
+    &:hover {
+        color: #fff;
+        fill: #fff;
+        background: @blueColor;
+        border-color: #aef;
+        box-shadow: 0 0 8px #fff;
+    }
+
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+// 默认滚动条样式
+*::-webkit-scrollbar {
+    background-color: transparent;
+    height: 12px;
+    width: 12px
+}
+
+* {
+    scrollbar-width: thin
+}
+
+*::-webkit-scrollbar-thumb {
+    transition: background .2s ease-in-out;
+    border: 3px solid transparent;
+    -webkit-background-clip: content-box;
+    background-clip: content-box;
+    --tw-bg-opacity: 1;
+    background-color: #474c50;
+    border-radius: 9999px
+}
+
+
+*::-webkit-scrollbar-thumb:hover {
+    --tw-bg-opacity: 1;
+    background-color: #474c50;
+}
+
+
+
+*::-webkit-scrollbar-corner {
+    background-color: transparent
 }

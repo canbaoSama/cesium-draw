@@ -3,8 +3,9 @@ import { Camera, Ion, Rectangle, UrlTemplateImageryProvider, Viewer, createWorld
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 
-import { DRAW_GRAPH_MAP, LAYER_CONTROL_TYPE } from '@/constants/cesium'
-import '@/utils/dexie'
+import '@/assets/Sandcastle-header'
+import type DrawGraphLine from '@/utils/drawGraph/drawLine'
+import { DRAW_GRAPH_MAP } from '@/constants/cesium'
 
 import { CESIUM_CONFIG, defaultAccessToken } from '@/config'
 
@@ -12,6 +13,9 @@ import { drawFunc } from '@/utils/drawGraph'
 
 const viewer = ref(<Viewer>{}) // 断言方式赋初始值
 let terrainProvider: TerrainProvider
+
+// 绘制图形
+const drawGraph: DrawGraphLine | any = ref()
 
 // 创建基本的3D场景
 async function createViewer() {
@@ -34,24 +38,10 @@ async function createViewer() {
         terrainProvider = await createWorldTerrainAsync({ requestWaterMask: true, requestVertexNormals: true })
         viewer.value.terrainProvider = terrainProvider
         viewer.value.scene.globe.depthTestAgainstTerrain = true // 地形遮挡
-
-        // infobox 的camera图标点击事件
-        // viewer.value.infoBox.viewModel.cameraClicked.addEventListener((e) => {
-        //     if (!e.isCameraTracking)
-        //         setSelEntityView()
-        // })
-        // 选中实体事件
-        viewer.value.selectedEntityChanged.addEventListener(() => {
-            // viewer.value.selectedEntity = a
-        })
-
-        drawLayer(LAYER_CONTROL_TYPE.INIT)
     }
     catch {
         ElMessage.error('cesium 场景加载失败, 请检查网络信息并刷新重试')
     }
-
-    // viewer.value.scene.debugShowFramesPerSecond = true // 展示 fps
 }
 
 // 创建默认地球贴图
@@ -75,4 +65,14 @@ function DrawGraphType(drawType: string) {
         drawGraph.value?.clearHandler()
         drawGraph.value = undefined
     }
+}
+
+export default {
+    viewer,
+
+    createViewer,
+    addDefaultImageryProvider,
+    DrawGraphType,
+
+    drawGraph,
 }

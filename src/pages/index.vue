@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
+
 import DrawGraph from '@/components/DrawGraph.vue'
-import MouseTooltip from '@/components/MouseToolTip.vue'
-
+import MouseTooltip from '@/components/MouseTooltip.vue'
 import 'cesium/Build/CesiumUnminified/Widgets/widgets.css'
+import cesiumStore from '@/pages/index'
 
-import '@/assets/Sandcastle-header'
-import { useCesiumStore } from '@/store/index'
-
-const cesiumStore = useCesiumStore()
 onMounted(async () => {
     await cesiumStore.createViewer()
     // 地球贴图
