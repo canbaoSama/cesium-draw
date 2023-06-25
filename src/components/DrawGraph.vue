@@ -9,7 +9,7 @@ import type { DrawEntity, configInterface } from '@/types/cesiumDraw'
 import { DRAW_GRAPH_MAP } from '@/constants/cesium'
 import { OPERATE_STATUS } from '@/constants/index'
 import { drawConfig } from '@/utils/drawGraph/config'
-import cesiumStore from '@/pages/index'
+import cesiumStore from '@/components/index'
 
 const drawingType = ref('')
 
@@ -226,3 +226,4 @@ async function saveConfig() {
     }
 }
 </style>
+@/components/index

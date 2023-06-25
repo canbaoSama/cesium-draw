@@ -4,7 +4,7 @@ import { onMounted } from 'vue'
 import DrawGraph from '@/components/DrawGraph.vue'
 import MouseTooltip from '@/components/MouseTooltip.vue'
 import 'cesium/Build/CesiumUnminified/Widgets/widgets.css'
-import cesiumStore from '@/pages/index'
+import cesiumStore from '@/components/index'
 
 onMounted(async () => {
     await cesiumStore.createViewer()

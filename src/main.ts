@@ -5,19 +5,17 @@ import 'virtual:uno.css'
 
 import App from './App.vue'
 
-import router from '@/router'
 import '@/styles/index.less'
 
 // 构建vue实例
 const app = createApp(App)
-
-app.use(router)
 
 app.use(ElButton)
 declare global {
     interface Window {
         CESIUM_BASE_URL: string
         Sandcastle: any
+        Vue: any
     }
 }
 
