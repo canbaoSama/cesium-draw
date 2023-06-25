@@ -207,6 +207,7 @@ async function saveConfig() {
     width: auto;
     padding: 0px 8px;
     border-radius: 4px;
+    color: #fff;
 }
 
 .control-btns .public-cesium-btn {
