@@ -1,4 +1,4 @@
-import path, { resolve } from 'node:path'
+import { resolve } from 'node:path'
 
 import UnoCSS from 'unocss/vite'
 
@@ -97,10 +97,8 @@ export default defineConfig(() => {
             assetsDir: 'assets', // 指定生成静态资源的存放路径
             rollupOptions: {
                 output: {
-                    manualChunks(id) {
-                        // 将pinia的全局库实例打包进vendor，避免和页面一起打包造成资源重复引入
-                        if (id.includes(path.resolve(__dirname, '/src/store/index.ts')))
-                            return 'vendor'
+                    manualChunks() {
+                        // 将全局库实例打包进vendor，避免和页面一起打包造成资源重复引入
                     },
                 },
             },

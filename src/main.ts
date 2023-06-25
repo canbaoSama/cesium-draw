@@ -1,4 +1,3 @@
-import { createPinia } from 'pinia'
 import { createApp } from 'vue'
 import { ElButton } from 'element-plus'
 import 'element-plus/theme-chalk/dark/css-vars.css'
@@ -14,8 +13,6 @@ import '@/styles/index.less'
 const app = createApp(App)
 
 app.use(router)
-
-app.use(createPinia())
 
 app.use(ElButton)
 declare global {

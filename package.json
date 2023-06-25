@@ -7,24 +7,19 @@
     },
     "dependencies": {
         "@antfu/eslint-config": "^0.38.4",
-        "@element-plus/icons-vue": "^2.1.0",
         "@types/lodash-es": "^4.17.7",
         "@types/node": "^18.15.11",
         "@vueuse/core": "^10.1.2",
-        "axios": "^0.24.0",
         "cesium": "^1.104.0",
         "element-plus": "^2.3.3",
-        "isomorphic-ws": "^5.0.0",
         "lodash-es": "^4.17.21",
         "peerjs": "^1.4.7",
-        "pinia": "^2.0.33",
         "unocss": "^0.53.0",
         "vite-plugin-externals": "^0.6.2",
         "vite-plugin-insert-html": "^1.0.1",
         "vite-plugin-static-copy": "^0.13.1",
         "vue": "^3.2.47",
-        "vue-router": "^4.1.6",
-        "ws": "^8.13.0"
+        "vue-router": "^4.1.6"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^4.1.0",
