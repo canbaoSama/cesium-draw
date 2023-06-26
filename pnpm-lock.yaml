@@ -17,8 +17,8 @@ dependencies:
     specifier: ^1.104.0
     version: 1.104.0
   cesium-draw-ts:
-    specifier: ^1.0.6
-    version: 1.0.6(eslint@8.43.0)(postcss@8.4.24)(typescript@4.9.5)(vite@4.2.1)
+    specifier: ^1.0.8
+    version: 1.0.8(eslint@8.43.0)(postcss@8.4.24)(typescript@4.9.5)(vite@4.2.1)
   element-plus:
     specifier: ^2.3.3
     version: 2.3.3(vue@3.2.47)
@@ -1440,8 +1440,8 @@ packages:
       upper-case-first: 2.0.2
     dev: true
 
-  /cesium-draw-ts@1.0.6(eslint@8.43.0)(postcss@8.4.24)(typescript@4.9.5)(vite@4.2.1):
-    resolution: {integrity: sha512-+XRkxyoYAb32U3P2ccb+P5gqb2X0e49uKYEVYDMW0YLO2Vv4YOSKsCHgSCEbLv77mamw4zPSi5faRJ3Oi6mfCQ==}
+  /cesium-draw-ts@1.0.8(eslint@8.43.0)(postcss@8.4.24)(typescript@4.9.5)(vite@4.2.1):
+    resolution: {integrity: sha512-v4oXSgkGsvjhmJOUry2+mu5y0QL4qHWEIMFuK22bqfIZ6RuicIi1X2MnlNEdddvNl/NOrYtsfxRs0M8Xm02GBA==}
     dependencies:
       '@antfu/eslint-config': 0.38.4(eslint@8.43.0)(typescript@4.9.5)
       '@types/lodash-es': 4.17.7

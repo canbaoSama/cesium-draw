@@ -19,7 +19,7 @@
         "@types/node": "^18.15.11",
         "@vueuse/core": "^10.1.2",
         "cesium": "^1.104.0",
-        "cesium-draw-ts": "^1.0.6",
+        "cesium-draw-ts": "^1.0.8",
         "element-plus": "^2.3.3",
         "lodash-es": "^4.17.21",
         "peerjs": "^1.4.7",
