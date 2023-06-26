@@ -1,4 +1,5 @@
 import type { App } from 'vue'
+import 'virtual:uno.css'
 
 import DrawViewer from '@/components/DrawViewer.vue'
 import { drawConfig, drawFunc } from '@/utils/drawGraph/index'
