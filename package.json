@@ -4,11 +4,6 @@
     "main": "./src/start.ts",
     "author": "billyang",
     "license": "ISC",
-    "files": [
-        "dist",
-        "package.json",
-        "README.md"
-    ],
     "scripts": {
         "dev": "vite",
         "build": "vite build"
