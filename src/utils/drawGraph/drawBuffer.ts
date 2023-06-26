@@ -4,15 +4,15 @@ import { CallbackProperty, Cartesian3, Color, PolygonGraphics, PolygonHierarchy,
 import DrawGraphBase from './drawBase'
 import { FLAG_MAP } from './config'
 
-import type { DrawCartesian3, DrawEntity, configInterface } from '@/types/cesiumDraw'
+import type { BufferOptions, DrawCartesian3, DrawEntity, configInterface } from '@/types/cesiumDraw'
 
 import { DRAW_GRAPH_MAP } from '@/constants/cesium'
 
 export default class DrawGraphBuffer extends DrawGraphBase {
     viewer: Viewer
 
-    constructor(viewer: Viewer) {
-        super(viewer)
+    constructor(viewer: Viewer, options: BufferOptions = {}) {
+        super(viewer, options)
 
         this.viewer = viewer
         this.drawHandler = new ScreenSpaceEventHandler(viewer.scene.canvas)
@@ -104,7 +104,7 @@ export default class DrawGraphBuffer extends DrawGraphBase {
                     return
 
                 const entity = pickedObject.id
-                if (entity.layerId !== this.layerId)
+                if (entity.layerId !== this.drawConfig.layerId)
                     return
 
                 if (entity.flag !== 'anchor' && entity.flag !== 'mid_anchor')
@@ -147,8 +147,8 @@ export default class DrawGraphBuffer extends DrawGraphBase {
     }
 
     showRegion2Map() {
-        if (!this.lineMaterial) {
-            this.lineMaterial = new PolylineDashMaterialProperty({
+        if (!this.drawConfig.lineMaterial) {
+            this.drawConfig.lineMaterial = new PolylineDashMaterialProperty({
                 dashLength: 16,
                 color: Color.fromCssColorString('#00f').withAlpha(0.7),
             })
@@ -160,8 +160,8 @@ export default class DrawGraphBuffer extends DrawGraphBase {
             polyline: {
                 positions: dynamicPositions,
                 clampToGround: true,
-                width: this.lineWidth,
-                material: this.lineMaterial,
+                width: this.drawConfig.lineWidth,
+                material: this.drawConfig.lineMaterial,
             },
         }
         this.entity = this.viewer.entities.add(bData)
@@ -172,11 +172,11 @@ export default class DrawGraphBuffer extends DrawGraphBase {
         if (isModify)
             this.tempPositions = this.cloneDeep(this.positions)
 
-        if (!this.material)
-            this.material = Color.fromCssColorString('#ff0').withAlpha(0.5)
+        if (!this.drawConfig.material)
+            this.drawConfig.material = Color.fromCssColorString('#ff0').withAlpha(0.5)
 
-        if (!this.lineMaterial) {
-            this.lineMaterial = new PolylineDashMaterialProperty({
+        if (!this.drawConfig.lineMaterial) {
+            this.drawConfig.lineMaterial = new PolylineDashMaterialProperty({
                 dashLength: 16,
                 color: Color.fromCssColorString('#00f').withAlpha(0.7),
             })
@@ -186,22 +186,22 @@ export default class DrawGraphBuffer extends DrawGraphBase {
             return this.tempPositions
         }, false)
         const dynamicHierarchy = new CallbackProperty(() => {
-            const pnts: Cartesian3[] | undefined = this.computeBufferLine(this.tempPositions, (this.radius || 1) * 1000) || undefined
+            const pnts: Cartesian3[] | undefined = this.computeBufferLine(this.tempPositions, (this.drawConfig.radius || 1) * 1000) || undefined
             const pHierarchy = new PolygonHierarchy(pnts)
             return pHierarchy
         }, false)
         const bData = {
             polygon: new PolygonGraphics({
                 hierarchy: dynamicHierarchy,
-                material: this.material,
-                show: this.fill,
+                material: this.drawConfig.material,
+                show: this.drawConfig.fill,
             }),
             polyline: {
                 positions: linePositions,
                 clampToGround: true,
-                width: this.lineWidth || 2,
-                material: this.lineMaterial,
-                show: this.line,
+                width: this.drawConfig.lineWidth || 2,
+                material: this.drawConfig.lineMaterial,
+                show: this.drawConfig.line,
             },
         }
         this.entity = this.viewer.entities.add(bData)
@@ -249,7 +249,7 @@ export default class DrawGraphBuffer extends DrawGraphBase {
 
     // 保存弹框配置
     saveConfig(config: configInterface) {
-        this.radius = config.radius
+        this.drawConfig.radius = config.radius
 
         // 进入编辑状态
         this.clearDrawing()
@@ -261,7 +261,7 @@ export default class DrawGraphBuffer extends DrawGraphBase {
         this.objId = objId
         this.positions = saveData.positions
         this.tempPositions = saveData.tempPositions
-        this.radius = parseFloat(saveData.radius)
+        this.drawConfig.radius = parseFloat(saveData.radius)
         this.showModifyRegion2Map()
     }
 

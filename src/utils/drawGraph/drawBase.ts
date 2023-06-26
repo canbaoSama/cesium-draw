@@ -9,12 +9,8 @@ import { drawConfig } from './index'
 
 import { DRAW_GRAPH_MAP } from '@/constants/cesium'
 import { radToDeg } from '@/utils/common'
-import type { DrawCartesian3, DrawEntity, InitOptions, createPointOpt, posInterface } from '@/types/cesiumDraw'
+import type { DrawCartesian3, DrawEntity, createPointOpt, posInterface } from '@/types/cesiumDraw'
 import { CreateTooltip } from '@/utils/tooltip'
-
-export class SetDrawConfig {
-    constructor(options?: InitOptions) { }
-}
 
 export default class DrawGraphBase extends CreateTooltip {
     viewer: Viewer
@@ -25,15 +21,11 @@ export default class DrawGraphBase extends CreateTooltip {
 
     drawType = '' // 绘制图形是何种类型
     objId = new Date().getTime() // 利用时间戳来记录,便于删除时进行判断
-    options: InitOptions = {}
 
     layerDom: HTMLElement = <HTMLElement>document.getElementById('drawPopConfirmLayer')
 
     entity: DrawEntity | undefined // 当前绘制的 entity
     outlineEntity: DrawEntity | undefined
-    material: PolylineGlowMaterialProperty | Color | undefined
-    outlineMaterial: PolylineDashMaterialProperty | Color | PolylineDashMaterialProperty | undefined
-    radiusLineMaterial: | PolylineDashMaterialProperty | undefined
     position: DrawCartesian3 | undefined
     oldPosition: DrawCartesian3 | undefined
     positions: Array<DrawCartesian3> = []
@@ -41,6 +33,11 @@ export default class DrawGraphBase extends CreateTooltip {
     tempPositions: Array<DrawCartesian3> = []
     markers: { [key: number | string]: DrawEntity } = {} // 记录的 entity
     saveMarkers: { [key: number | string]: DrawEntity } = {} // 同 markers,但是这里保存的是需要保留的锚点,只有在取消绘制时才能删除
+
+    material: PolylineGlowMaterialProperty | Color | undefined
+    outlineMaterial: PolylineDashMaterialProperty | Color | PolylineDashMaterialProperty | undefined
+    radiusLineMaterial: PolylineDashMaterialProperty | undefined
+    lineMaterial: PolylineDashMaterialProperty | undefined
 
     dragIconLight = drawConfig.dragIconLight // 绘制时的红点
     dragIcon = drawConfig.dragIcon // 绘制时的灰点
@@ -52,21 +49,40 @@ export default class DrawGraphBase extends CreateTooltip {
     extrudedHeight = drawConfig.extrudedHeight
     polylineWidth = drawConfig.polylineWidth
 
-    // 绘制缓冲区的配置
     radius = drawConfig.radius
     line = drawConfig.line
     lineWidth = drawConfig.lineWidth
-    lineMaterial: PolylineDashMaterialProperty | undefined
+
+    drawConfig: { [key: string]: any } = {
+        material: undefined,
+        outlineMaterial: undefined,
+        radiusLineMaterial: undefined,
+        lineMaterial: undefined,
+
+        dragIconLight: drawConfig.dragIconLight, // 绘制时的红点
+        dragIcon: drawConfig.dragIcon, // 绘制时的灰点
+        layerId: drawConfig.layerId,
+        fill: drawConfig.fill,
+        outline: drawConfig.outline,
+        outlineWidth: drawConfig.outlineWidth,
+        outlineColor: drawConfig.outlineColor,
+        extrudedHeight: drawConfig.extrudedHeight,
+        polylineWidth: drawConfig.polylineWidth,
+
+        radius: drawConfig.radius,
+        line: drawConfig.line,
+        lineWidth: drawConfig.lineWidth,
+    }
 
     dialogVisible: Function = () => { } // 控制信息配置框的展示
 
-    constructor(viewer: Viewer, options: SetDrawConfig) {
+    constructor(viewer: Viewer, options: { [key: string]: any } = {}) {
         super()
         this.viewer = viewer
         this.objId = new Date().getTime()
 
         Object.keys(options).forEach((key: string) => {
-            this[key] = options[key]
+            this.drawConfig[key] = options[key]
         })
 
         nextTick(() => {
@@ -85,14 +101,14 @@ export default class DrawGraphBase extends CreateTooltip {
             position: cartesian,
             label: options.label || {},
             billboard: {
-                image: options.image || this.dragIconLight,
+                image: options.image || this.drawConfig.dragIconLight,
                 eyeOffset: new ConstantProperty(new Cartesian3(0, 0, -500)),
                 heightReference: HeightReference.CLAMP_TO_GROUND,
                 disableDepthTestDistance: Number.POSITIVE_INFINITY,
             },
         })
         point.oid = options.oid
-        point.layerId = this.layerId
+        point.layerId = this.drawConfig.layerId
         point.flag = options.flag || FLAG_MAP.ANCHOR
         point.objId = this.objId
         point.drawType = this.drawType
@@ -119,12 +135,10 @@ export default class DrawGraphBase extends CreateTooltip {
         const positions = this.tempPositions
         for (let i = 0; i < positions.length; i++) {
             const ys = i % 2
-            if (this.options.startPoint && i === 0)
-                this.createPoint(positions[i], { oid: i, startPoint: true })
-            else if (ys === 0)
+            if (ys === 0)
                 this.createPoint(positions[i], { oid: i })
             else
-                this.createPoint(positions[i], { oid: i, flag: FLAG_MAP.MID_ANCHOR, image: this.dragIcon })
+                this.createPoint(positions[i], { oid: i, flag: FLAG_MAP.MID_ANCHOR, image: this.drawConfig.dragIcon })
         }
     }
 
@@ -292,7 +306,7 @@ export default class DrawGraphBase extends CreateTooltip {
     // 设置公共的必须参数
     setPublicParams() {
         if (this.entity) {
-            this.entity.layerId = this.layerId
+            this.entity.layerId = this.drawConfig.layerId
             this.entity.objId = this.objId
             this.entity.drawType = this.drawType
         }
@@ -351,7 +365,7 @@ export default class DrawGraphBase extends CreateTooltip {
                     break
                 case DRAW_GRAPH_MAP.BUFFER.key:
                     saveData = {
-                        radius: this.radius,
+                        radius: this.drawConfig.radius,
                         positions: this.positions,
                     }
                     break
@@ -401,8 +415,8 @@ export default class DrawGraphBase extends CreateTooltip {
 
     // 清除 outlineEntity
     clearOutlineEntity() {
-        if (this.outlineEntity)
-            this.viewer.entities.remove(this.outlineEntity)
+        if (this.drawConfig.outlineEntity)
+            this.viewer.entities.remove(this.drawConfig.outlineEntity)
     }
 
     // 移除相关场景,包括绘制的图形
@@ -455,7 +469,7 @@ export default class DrawGraphBase extends CreateTooltip {
     // 清除所有绘制相关
     clear() {
         this.clearHandler()
-        this.clearMarkers(this.layerId)
+        this.clearMarkers(this.drawConfig.layerId)
         this.clearOutlineEntity()
         this.tooltip.setVisible(false)
     }
@@ -470,7 +484,7 @@ export default class DrawGraphBase extends CreateTooltip {
 
     //     for (let i = 0; i < entityList.length; i++) {
     //         const entity: DrawEntity = entityList[i]
-    //         if (entity.layerId !== this.layerId)
+    //         if (entity.layerId !== this.drawConfig.layerId)
     //             continue
 
     //         if (entity.flag !== 'anchor')

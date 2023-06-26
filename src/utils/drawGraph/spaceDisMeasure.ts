@@ -5,13 +5,13 @@ import DrawGraphBase from './drawBase'
 import { ENTITY_LABEL_DEFAULT_CONFIG, FLAG_MAP } from './config'
 
 import { DRAW_GRAPH_MAP } from '@/constants/cesium'
-import type { DrawCartesian3, DrawEntity } from '@/types/cesiumDraw'
+import type { DrawCartesian3, DrawEntity, SpaceDisMeasureOptions } from '@/types/cesiumDraw'
 
 export default class DrawGraphSpaceDisMeasure extends DrawGraphBase {
     viewer: Viewer
 
-    constructor(viewer: Viewer) {
-        super(viewer)
+    constructor(viewer: Viewer, options: SpaceDisMeasureOptions = {}) {
+        super(viewer, options)
 
         this.viewer = viewer
         this.drawHandler = new ScreenSpaceEventHandler(viewer.scene.canvas)
@@ -86,8 +86,8 @@ export default class DrawGraphSpaceDisMeasure extends DrawGraphBase {
 
     // 添加线条
     showPolyline2Map(isModify?: boolean) {
-        if (!this.material) {
-            this.material = new PolylineGlowMaterialProperty({
+        if (!this.drawConfig.material) {
+            this.drawConfig.material = new PolylineGlowMaterialProperty({
                 glowPower: 0.25,
                 color: Color.fromCssColorString('#00f').withAlpha(0.9),
             })
@@ -108,8 +108,8 @@ export default class DrawGraphSpaceDisMeasure extends DrawGraphBase {
             polyline: {
                 positions: dynamicPositions,
                 clampToGround: false,
-                width: this.polylineWidth,
-                material: this.material,
+                width: this.drawConfig.polylineWidth,
+                material: this.drawConfig.material,
             },
         }
         this.entity = this.viewer.entities.add(bData)
@@ -128,7 +128,7 @@ export default class DrawGraphSpaceDisMeasure extends DrawGraphBase {
             if (ys === 0)
                 this.createPoint(positions[i], { oid: i })
             else
-                this.createPoint(positions[i], { oid: i, flag: FLAG_MAP.MID_ANCHOR, image: this.dragIcon })
+                this.createPoint(positions[i], { oid: i, flag: FLAG_MAP.MID_ANCHOR, image: this.drawConfig.dragIcon })
         }
     }
 
@@ -168,7 +168,7 @@ export default class DrawGraphSpaceDisMeasure extends DrawGraphBase {
                     return
 
                 const entity = pickedObject.id
-                if (entity.layerId !== this.layerId)
+                if (entity.layerId !== this.drawConfig.layerId)
                     return
                 if (entity.flag !== FLAG_MAP.ANCHOR && entity.flag !== FLAG_MAP.MID_ANCHOR)
                     return

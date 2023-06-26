@@ -7,15 +7,15 @@ import {
 import DrawGraphBase from './drawBase'
 import { FLAG_MAP } from './config'
 
-import type { DrawCartesian3, DrawEntity } from '@/types/cesiumDraw'
+import type { CircleOptions, DrawCartesian3, DrawEntity } from '@/types/cesiumDraw'
 
 import { DRAW_GRAPH_MAP } from '@/constants/cesium'
 
 export default class DrawGraphCircle extends DrawGraphBase {
     viewer: Viewer
 
-    constructor(viewer: Viewer) {
-        super(viewer)
+    constructor(viewer: Viewer, options: CircleOptions = {}) {
+        super(viewer, options)
 
         this.viewer = viewer
         this.drawHandler = new ScreenSpaceEventHandler(viewer.scene.canvas)
@@ -80,11 +80,11 @@ export default class DrawGraphCircle extends DrawGraphBase {
         if (isModify)
             this.positions = this.cloneDeep(this.oldPositions)
 
-        if (!this.material)
-            this.material = Color.fromCssColorString('#ff0').withAlpha(0.5)
+        if (!this.drawConfig.material)
+            this.drawConfig.material = Color.fromCssColorString('#ff0').withAlpha(0.5)
 
-        if (this.radiusLineMaterial == null) {
-            this.radiusLineMaterial = new PolylineDashMaterialProperty({
+        if (this.drawConfig.radiusLineMaterial == null) {
+            this.drawConfig.radiusLineMaterial = new PolylineDashMaterialProperty({
                 dashLength: 16,
                 color: Color.fromCssColorString('#00f').withAlpha(0.7),
             })
@@ -140,13 +140,13 @@ export default class DrawGraphCircle extends DrawGraphBase {
             },
             polygon: new PolygonGraphics({
                 hierarchy: dynamicHierarchy,
-                material: this.material,
-                fill: this.fill,
-                outline: this.outline,
-                outlineWidth: this.outlineWidth,
-                outlineColor: this.outlineColor,
-                // this.extrudedHeight > 0 时这四个参数需要添加
-                // extrudedHeight: this.extrudedHeight,
+                material: this.drawConfig.material,
+                fill: this.drawConfig.fill,
+                outline: this.drawConfig.outline,
+                outlineWidth: this.drawConfig.outlineWidth,
+                outlineColor: this.drawConfig.outlineColor,
+                // this.drawConfig.extrudedHeight > 0 时这四个参数需要添加
+                // extrudedHeight: this.drawConfig.extrudedHeight,
                 // extrudedHeightReference: HeightReference.RELATIVE_TO_GROUND,
                 // closeTop: true,
                 // closeBottom: true,
@@ -154,8 +154,8 @@ export default class DrawGraphCircle extends DrawGraphBase {
             polyline: {
                 positions: lineDynamicPositions,
                 clampToGround: true,
-                width: this.lineWidth,
-                material: this.radiusLineMaterial,
+                width: this.drawConfig.lineWidth,
+                material: this.drawConfig.radiusLineMaterial,
                 disableDepthTestDistance: Number.POSITIVE_INFINITY,
             },
         }
@@ -172,8 +172,8 @@ export default class DrawGraphCircle extends DrawGraphBase {
 
     // 添加圆外圈线条
     showCircleOutline2Map() {
-        if (!this.outlineMaterial) {
-            this.outlineMaterial = new PolylineDashMaterialProperty({
+        if (!this.drawConfig.outlineMaterial) {
+            this.drawConfig.outlineMaterial = new PolylineDashMaterialProperty({
                 dashLength: 16,
                 color: Color.fromCssColorString('#f00').withAlpha(0.7),
             })
@@ -186,14 +186,14 @@ export default class DrawGraphCircle extends DrawGraphBase {
             polyline: {
                 positions: outelinePositions,
                 clampToGround: true,
-                width: this.outlineWidth,
-                material: this.outlineMaterial,
+                width: this.drawConfig.outlineWidth,
+                material: this.drawConfig.outlineMaterial,
             },
         }
-        this.outlineEntity = this.viewer.entities.add(bData)
-        this.outlineEntity.layerId = this.layerId
-        this.outlineEntity.objId = this.objId
-        this.outlineEntity.drawType = this.drawType
+        this.drawConfig.outlineEntity = this.viewer.entities.add(bData)
+        this.drawConfig.outlineEntity.layerId = this.drawConfig.layerId
+        this.drawConfig.outlineEntity.objId = this.objId
+        this.drawConfig.outlineEntity.drawType = this.drawType
     }
 
     // 启动修改
@@ -226,7 +226,7 @@ export default class DrawGraphCircle extends DrawGraphBase {
                     return
 
                 const entity = pickedObject.id
-                if (entity.layerId !== this.layerId || entity.flag !== FLAG_MAP.ANCHOR)
+                if (entity.layerId !== this.drawConfig.layerId || entity.flag !== FLAG_MAP.ANCHOR)
                     return
 
                 pickedAnchor = entity
@@ -255,7 +255,7 @@ export default class DrawGraphCircle extends DrawGraphBase {
 
     // 创建中心位置
     createCenter(cartesian: DrawCartesian3, oid: number) {
-        return this.createPoint(cartesian, { oid, image: this.dragIcon, needSave: true })
+        return this.createPoint(cartesian, { oid, image: this.drawConfig.dragIcon, needSave: true })
     }
 
     computeCirclePolygon(positions: Array<DrawCartesian3>) {

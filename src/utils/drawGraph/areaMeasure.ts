@@ -8,13 +8,13 @@ import DrawGraphBase from './drawBase'
 import { ENTITY_LABEL_DEFAULT_CONFIG, FLAG_MAP } from './config'
 
 import { DRAW_GRAPH_MAP } from '@/constants/cesium'
-import type { DrawCartesian3, DrawEntity } from '@/types/cesiumDraw'
+import type { AreaMeasureOptions, DrawCartesian3, DrawEntity } from '@/types/cesiumDraw'
 
 export default class DrawGraphAreaMeasure extends DrawGraphBase {
     viewer: Viewer
 
-    constructor(viewer: Viewer) {
-        super(viewer)
+    constructor(viewer: Viewer, options: AreaMeasureOptions = {}) {
+        super(viewer, options)
 
         this.viewer = viewer
         this.drawHandler = new ScreenSpaceEventHandler(viewer.scene.canvas)
@@ -96,11 +96,11 @@ export default class DrawGraphAreaMeasure extends DrawGraphBase {
     }
 
     showRegion2Map(isModify?: boolean) {
-        if (!this.material)
-            this.material = Color.fromCssColorString('#ff0').withAlpha(0.5)
+        if (!this.drawConfig.material)
+            this.drawConfig.material = Color.fromCssColorString('#ff0').withAlpha(0.5)
 
-        if (!this.outlineMaterial) {
-            this.outlineMaterial = new PolylineDashMaterialProperty({
+        if (!this.drawConfig.outlineMaterial) {
+            this.drawConfig.outlineMaterial = new PolylineDashMaterialProperty({
                 dashLength: 16,
                 color: Color.fromCssColorString('#00f').withAlpha(0.7),
             })
@@ -138,15 +138,15 @@ export default class DrawGraphAreaMeasure extends DrawGraphBase {
             },
             polygon: new PolygonGraphics({
                 hierarchy: dynamicHierarchy,
-                material: this.material,
-                show: this.fill,
+                material: this.drawConfig.material,
+                show: this.drawConfig.fill,
             }),
             polyline: {
                 positions: outlineDynamicPositions,
                 clampToGround: true,
-                width: this.outlineWidth,
-                material: this.outlineMaterial,
-                show: this.outline,
+                width: this.drawConfig.outlineWidth,
+                material: this.drawConfig.outlineMaterial,
+                show: this.drawConfig.outline,
             },
         }
         this.entity = this.viewer.entities.add(bData)
@@ -164,7 +164,7 @@ export default class DrawGraphAreaMeasure extends DrawGraphBase {
             if (ys === 0)
                 this.createPoint(positions[i], { oid: i })
             else
-                this.createPoint(positions[i], { oid: i, flag: FLAG_MAP.MID_ANCHOR, image: this.dragIcon })
+                this.createPoint(positions[i], { oid: i, flag: FLAG_MAP.MID_ANCHOR, image: this.drawConfig.dragIcon })
         }
     }
 
@@ -204,7 +204,7 @@ export default class DrawGraphAreaMeasure extends DrawGraphBase {
                     return
 
                 const entity = pickedObject.id
-                if (entity.layerId !== this.layerId)
+                if (entity.layerId !== this.drawConfig.layerId)
                     return
                 if (entity.flag !== FLAG_MAP.ANCHOR && entity.flag !== FLAG_MAP.MID_ANCHOR)
                     return

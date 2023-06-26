@@ -5,13 +5,13 @@ import DrawGraphBase from './drawBase'
 import { ENTITY_LABEL_DEFAULT_CONFIG, FLAG_MAP } from './config'
 
 import { DRAW_GRAPH_MAP } from '@/constants/cesium'
-import type { DrawCartesian3, DrawEntity, posInterface } from '@/types/cesiumDraw'
+import type { DrawCartesian3, DrawEntity, PosMeasureOptions, posInterface } from '@/types/cesiumDraw'
 
 export default class DrawGraphPosMeasure extends DrawGraphBase {
     viewer: Viewer
 
-    constructor(viewer: Viewer) {
-        super(viewer)
+    constructor(viewer: Viewer, options: PosMeasureOptions = {}) {
+        super(viewer, options)
 
         this.viewer = viewer
         this.drawHandler = new ScreenSpaceEventHandler(viewer.scene.canvas)
@@ -81,7 +81,7 @@ export default class DrawGraphPosMeasure extends DrawGraphBase {
                     return
 
                 const entity = pickedObject.id
-                if (entity.layerId !== this.layerId || entity.flag !== FLAG_MAP.ANCHOR)
+                if (entity.layerId !== this.drawConfig.layerId || entity.flag !== FLAG_MAP.ANCHOR)
                     return
 
                 pickedAnchor = entity

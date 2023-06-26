@@ -4,40 +4,25 @@ import { CallbackProperty, Color, PolylineGlowMaterialProperty, ScreenSpaceEvent
 import DrawGraphBase from './drawBase'
 import { FLAG_MAP } from './config'
 
-import type { DrawCartesian3, DrawEntity, InitOptions } from '@/types/cesiumDraw'
+import type { DrawCartesian3, DrawEntity, LineOptions } from '@/types/cesiumDraw'
 
 import { DRAW_GRAPH_MAP } from '@/constants/cesium'
 
 export default class DrawGraphLine extends DrawGraphBase {
     viewer: Viewer
 
-    constructor(viewer: Viewer, options: InitOptions = {}) {
-        super(viewer)
+    constructor(viewer: Viewer, options: LineOptions = {}) {
+        super(viewer, options)
 
         this.viewer = viewer
         this.drawHandler = new ScreenSpaceEventHandler(viewer.scene.canvas)
         this.drawType = DRAW_GRAPH_MAP.LINE.key
-        this.options = options
-    }
-
-    initStartPoint() {
-        this.positions = []
-        let point: DrawEntity | undefined
-        if (this.options?.startPoint) {
-            this.positions.push(this.options.startPoint)
-            point = this.createPoint(this.options.startPoint, { oid: -1 })
-            this.showPolyline2Map()
-            this.positions.push(this.options.startPoint)
-            const oid = this.positions.length - 2
-            this.createPoint(this.options.startPoint, { oid })
-        }
-        return point
     }
 
     // 开始绘制线条
     startDraw() {
         let floatingPoint: DrawEntity | undefined
-        floatingPoint = this.initStartPoint()
+        this.positions = []
         // 鼠标左键点击事件
         this.drawHandler?.setInputAction((movement: any) => {
             const cartesian = this.checkPosition(movement.position)
@@ -86,21 +71,16 @@ export default class DrawGraphLine extends DrawGraphBase {
             this.viewer.entities.remove(floatingPoint)
             this.tooltip.setVisible(false)
 
-            if (typeof this.options?.rightEvent === 'function') {
-                this.options.rightEvent()
-            }
-            else {
-                // 进入编辑状态
-                this.clearDrawing()
-                this.showModifyPolyline2Map()
-            }
+            // 进入编辑状态
+            this.clearDrawing()
+            this.showModifyPolyline2Map()
         }, ScreenSpaceEventType.RIGHT_CLICK)
     }
 
     // 添加线条
     showPolyline2Map(isModify?: boolean) {
-        if (!this.material) {
-            this.material = new PolylineGlowMaterialProperty({
+        if (!this.drawConfig.material) {
+            this.drawConfig.material = new PolylineGlowMaterialProperty({
                 glowPower: 0.25,
                 color: Color.fromCssColorString('#00f').withAlpha(0.9),
             })
@@ -112,8 +92,8 @@ export default class DrawGraphLine extends DrawGraphBase {
             polyline: {
                 positions: dynamicPositions,
                 clampToGround: true,
-                width: this.polylineWidth,
-                material: this.material,
+                width: this.drawConfig.polylineWidth,
+                material: this.drawConfig.material,
             },
         }
         this.entity = this.viewer.entities.add(bData)
@@ -160,11 +140,7 @@ export default class DrawGraphLine extends DrawGraphBase {
                     return
 
                 const entity = pickedObject.id
-                if (this.options.startPoint && entity.startPoint) {
-                    this.tooltip.showAt(movement.position, '初始点无法修改')
-                    return
-                }
-                if (entity.layerId !== this.layerId)
+                if (entity.layerId !== this.drawConfig.layerId)
                     return
                 if (entity.flag !== FLAG_MAP.ANCHOR && entity.flag !== FLAG_MAP.MID_ANCHOR)
                     return

@@ -4,15 +4,15 @@ import { CallbackProperty, Color, PolygonGraphics, PolygonHierarchy, PolylineDas
 import DrawGraphBase from './drawBase'
 import { FLAG_MAP } from './config'
 
-import type { DrawCartesian3, DrawEntity } from '@/types/cesiumDraw'
+import type { DrawCartesian3, DrawEntity, PolygonOptions } from '@/types/cesiumDraw'
 
 import { DRAW_GRAPH_MAP } from '@/constants/cesium'
 
 export default class DrawGraphPolygon extends DrawGraphBase {
     viewer: Viewer
 
-    constructor(viewer: Viewer) {
-        super(viewer)
+    constructor(viewer: Viewer, options: PolygonOptions = {}) {
+        super(viewer, options)
 
         this.viewer = viewer
         this.drawHandler = new ScreenSpaceEventHandler(viewer.scene.canvas)
@@ -77,11 +77,11 @@ export default class DrawGraphPolygon extends DrawGraphBase {
     }
 
     showRegion2Map(isModify?: boolean) {
-        if (!this.material)
-            this.material = Color.fromCssColorString('#ff0').withAlpha(0.5)
+        if (!this.drawConfig.material)
+            this.drawConfig.material = Color.fromCssColorString('#ff0').withAlpha(0.5)
 
-        if (!this.outlineMaterial) {
-            this.outlineMaterial = new PolylineDashMaterialProperty({
+        if (!this.drawConfig.outlineMaterial) {
+            this.drawConfig.outlineMaterial = new PolylineDashMaterialProperty({
                 dashLength: 16,
                 color: Color.fromCssColorString('#00f').withAlpha(0.7),
             })
@@ -109,10 +109,10 @@ export default class DrawGraphPolygon extends DrawGraphBase {
         const bData = {
             polygon: new PolygonGraphics({
                 hierarchy: dynamicHierarchy,
-                material: this.material,
-                show: this.fill,
-                // this.extrudedHeight > 0 时这四个参数需要添加
-                // extrudedHeight: this.extrudedHeight,
+                material: this.drawConfig.material,
+                show: this.drawConfig.fill,
+                // this.drawConfig.extrudedHeight > 0 时这四个参数需要添加
+                // extrudedHeight: this.drawConfig.extrudedHeight,
                 // extrudedHeightReference: HeightReference.RELATIVE_TO_GROUND,
                 // closeTop: true,
                 // closeBottom: true,
@@ -120,9 +120,9 @@ export default class DrawGraphPolygon extends DrawGraphBase {
             polyline: {
                 positions: outlineDynamicPositions,
                 clampToGround: true,
-                width: this.outlineWidth,
-                material: this.outlineMaterial,
-                show: this.outline,
+                width: this.drawConfig.outlineWidth,
+                material: this.drawConfig.outlineMaterial,
+                show: this.drawConfig.outline,
             },
         }
         this.entity = this.viewer.entities.add(bData)
@@ -168,7 +168,7 @@ export default class DrawGraphPolygon extends DrawGraphBase {
                     return
 
                 const entity = pickedObject.id
-                if (entity.layerId !== this.layerId)
+                if (entity.layerId !== this.drawConfig.layerId)
                     return
                 if (entity.flag !== FLAG_MAP.ANCHOR && entity.flag !== FLAG_MAP.MID_ANCHOR)
                     return

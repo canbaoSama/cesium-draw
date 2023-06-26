@@ -4,15 +4,15 @@ import { Entity, ScreenSpaceEventHandler, ScreenSpaceEventType } from 'cesium'
 import DrawGraphBase from './drawBase'
 import { FLAG_MAP } from './config'
 
-import type { DrawCartesian3, DrawEntity } from '@/types/cesiumDraw'
+import type { DrawCartesian3, DrawEntity, PointOptions } from '@/types/cesiumDraw'
 
 import { DRAW_GRAPH_MAP } from '@/constants/cesium'
 
 export default class DrawGraphPoint extends DrawGraphBase {
     viewer: Viewer
 
-    constructor(viewer: Viewer) {
-        super(viewer)
+    constructor(viewer: Viewer, options: PointOptions = {}) {
+        super(viewer, options)
 
         this.viewer = viewer
         this.drawHandler = new ScreenSpaceEventHandler(viewer.scene.canvas)
@@ -77,7 +77,7 @@ export default class DrawGraphPoint extends DrawGraphBase {
                     return
 
                 const entity = pickedObject.id
-                if (entity.layerId !== this.layerId || entity.flag !== FLAG_MAP.ANCHOR)
+                if (entity.layerId !== this.drawConfig.layerId || entity.flag !== FLAG_MAP.ANCHOR)
                     return
 
                 pickedAnchor = entity
