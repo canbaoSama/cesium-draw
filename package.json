@@ -1,5 +1,5 @@
 {
-    "name": "cesium-draw-ts",
+    "name": "cesium-draw-vue",
     "version": "1.0.0",
     "description": "基于 cesium 绘制图形",
     "main": "src/npm.ts",
