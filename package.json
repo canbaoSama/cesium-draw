@@ -1,9 +1,17 @@
 {
     "name": "cesium-draw-ts",
-    "version": "1.0.9",
+    "version": "1.0.0",
+    "description": "基于 cesium 绘制图形",
     "main": "src/npm.ts",
     "author": "billyang",
     "license": "ISC",
+    "keywords": [
+        "cesium",
+        "draw",
+        "ts",
+        "cesium-draw",
+        "cesium-draw-ts"
+    ],
     "files": [
         "dist",
         "package.json",
