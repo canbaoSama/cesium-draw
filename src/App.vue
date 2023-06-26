@@ -1,7 +1,10 @@
-<script setup lang="ts" name="App"></script>
+<script setup lang="ts" name="App">
+</script>
 
 <template>
-    <router-view />
+    <router-view>
+        <DrawViewer />
+    </router-view>
 </template>
 
 <style lang="less"></style>

@@ -1,7 +1,7 @@
 {
     "name": "cesium-draw-ts",
     "version": "1.0.4",
-    "main": "./src/start.ts",
+    "main": "src/start.ts",
     "author": "billyang",
     "license": "ISC",
     "files": [

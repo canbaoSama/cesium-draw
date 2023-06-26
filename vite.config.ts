@@ -88,17 +88,28 @@ export default defineConfig(() => {
         },
         build: {
             sourcemap: true,
-            terserOptions: {
-                compress: {
-                    drop_console: true,
-                },
-            },
+            // terserOptions: {
+            //     compress: {
+            //         drop_console: true,
+            //     },
+            // },
             outDir: 'dist', // 指定输出路径
             assetsDir: 'assets', // 指定生成静态资源的存放路径
+            lib: {
+                entry: [resolve(__dirname, './src/start.ts'), './src/unocss.ts'],
+                name: 'draw-viewer', // 全局变量的名称
+                fileName: 'draw-viewer', // 输出文件的名字
+            },
             rollupOptions: {
+                // 确保外部化处理那些你不想打包进库的依赖
+                external: ['vue'],
                 output: {
                     manualChunks() {
                         // 将全局库实例打包进vendor，避免和页面一起打包造成资源重复引入
+                    },
+                    // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
+                    globals: {
+                        vue: 'Vue',
                     },
                 },
             },

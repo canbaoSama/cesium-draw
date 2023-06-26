@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup lang="ts" name="DrawViewer">
 import { onMounted } from 'vue'
 
 import DrawGraph from '@/components/DrawGraph.vue'
