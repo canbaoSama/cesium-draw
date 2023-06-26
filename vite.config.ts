@@ -96,7 +96,7 @@ export default defineConfig(() => {
             outDir: 'dist', // 指定输出路径
             assetsDir: 'assets', // 指定生成静态资源的存放路径
             lib: {
-                entry: resolve(__dirname, './src/npm.ts'),
+                entry: [resolve(__dirname, './src/npm.ts'), resolve(__dirname, './src/unocss.ts')],
                 name: 'draw-viewer', // 全局变量的名称
                 fileName: 'draw-viewer', // 输出文件的名字
             },
