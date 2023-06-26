@@ -1,6 +1,6 @@
 {
     "name": "cesium-draw-vue",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "基于 cesium 绘制图形",
     "main": "src/npm.ts",
     "author": "billyang",
