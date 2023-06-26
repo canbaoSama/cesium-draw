@@ -1,5 +1,5 @@
 <script setup lang="ts" name="App">
-import DrawViewer from 'cesium-draw-ts'
+import { DrawViewer } from 'cesium-draw-ts'
 </script>
 
 <template>
