@@ -1,19 +1,21 @@
 import type { App } from 'vue'
+import 'virtual:uno.css'
 
 import DrawViewer from '@/components/DrawViewer.vue'
 import { drawConfig, drawFunc } from '@/utils/drawGraph/index'
 
 const component = [DrawViewer]
 
-export function install(App: App) {
+function install(App: App) {
     component.forEach((item) => {
         App.component(item.name, DrawViewer)
     })
 }
-
-export default {
-    install,
+export {
     DrawViewer,
     drawConfig,
     drawFunc,
+}
+export default {
+    install,
 }
