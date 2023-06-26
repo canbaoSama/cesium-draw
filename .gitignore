@@ -3,3 +3,5 @@
 .history
 .vscode
 .idea
+/draw_ts_dist
+drawTs/node_modules

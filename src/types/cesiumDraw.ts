@@ -1,4 +1,4 @@
-import type { Cartesian3, Entity } from 'cesium'
+import type { Cartesian3, Color, Entity, PolylineDashMaterialProperty, PolylineGlowMaterialProperty } from 'cesium'
 
 export interface configInterface {
     radius: number
@@ -42,4 +42,19 @@ export interface posInterface {
 export interface InitOptions {
     startPoint?: DrawCartesian3
     rightEvent?: Function
+    layerId?: string
+    dragIconLight?: string // 绘制时的红点
+    dragIcon?: string // 绘制时的灰点
+    fill?: boolean
+    outline?: boolean
+    outlineWidth?: number
+    outlineColor?: Color
+    extrudedHeight?: number
+    polylineWidth?: number
+    radius?: number
+    line?: boolean
+    lineWidth?: number
+    outlineEntity?: DrawEntity | undefined
+    material?: PolylineGlowMaterialProperty | Color | undefined
+    outlineMaterial?: PolylineDashMaterialProperty | Color | undefined
 }

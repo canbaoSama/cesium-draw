@@ -12,6 +12,10 @@ import { radToDeg } from '@/utils/common'
 import type { DrawCartesian3, DrawEntity, InitOptions, createPointOpt, posInterface } from '@/types/cesiumDraw'
 import { CreateTooltip } from '@/utils/tooltip'
 
+export class SetDrawConfig {
+    constructor(options?: InitOptions) { }
+}
+
 export default class DrawGraphBase extends CreateTooltip {
     viewer: Viewer
     drawHandler: ScreenSpaceEventHandler | undefined
@@ -56,10 +60,14 @@ export default class DrawGraphBase extends CreateTooltip {
 
     dialogVisible: Function = () => { } // 控制信息配置框的展示
 
-    constructor(viewer: Viewer) {
+    constructor(viewer: Viewer, options: SetDrawConfig) {
         super()
         this.viewer = viewer
         this.objId = new Date().getTime()
+
+        Object.keys(options).forEach((key: string) => {
+            this[key] = options[key]
+        })
 
         nextTick(() => {
             this.init()

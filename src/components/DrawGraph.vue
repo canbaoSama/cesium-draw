@@ -226,4 +226,3 @@ async function saveConfig() {
     }
 }
 </style>
-@/components/index
