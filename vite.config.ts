@@ -49,6 +49,10 @@ export default defineConfig(() => {
                         src: 'node_modules/cesium/Build/CesiumUnminified/Widgets/*',
                         dest: 'libs/cesium/Widgets/',
                     },
+                    {
+                        src: 'src/assets/turf.min.js',
+                        dest: 'libs/draw',
+                    },
                 ],
             }),
             insertHtml({
