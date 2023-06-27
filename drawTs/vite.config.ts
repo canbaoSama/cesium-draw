@@ -10,8 +10,8 @@ export default defineConfig(() => {
             viteStaticCopy({
                 targets: [
                     {
-                        src: 'src/assets/turf.min.js',
-                        dest: 'libs/draw',
+                        src: '../src/assets/turf.min.js',
+                        dest: './',
                     },
                 ],
             }),
