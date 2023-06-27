@@ -1,6 +1,6 @@
 {
     "name": "cesium-draw-ts",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "基于 cesium 绘制图形",
     "main": "./npm.ts",
     "author": "billyang",
