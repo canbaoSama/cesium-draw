@@ -12,7 +12,7 @@ export const DRAW_GRAPH_MAP: { [key: string]: any } = {
     ATTACT_ARROW: { key: 'ATTACT_ARROW', name: '攻击箭头', type: 'warning', drawFunc: 'DrawGraphAttactArrow' },
     PINCER_ARROW: { key: 'PINCER_ARROW', name: '钳击箭头', type: 'warning', drawFunc: 'DrawGraphPincerArrow' },
 
-    POS_MEASURE: { key: 'POS_MEASURE', name: '坐标查询', type: 'success', drawFunc: 'DrawGraphPosMeasure' },
+    POS_MEASURE: { key: 'POS_MEASURE', name: '坐标查询', type: 'success', drawFunc: 'DrawGraphStraightArrow' },
     SPACE_DIS_MEASURE: { key: 'SPACE_DIS_MEASURE', name: '空间距离', type: 'success', drawFunc: 'DrawGraphSpaceDisMeasure' },
     STICK_DIS_MEASURE: { key: 'STICK_DIS_MEASURE', name: '贴地距离', type: 'success', drawFunc: 'DrawGraphStickDisMeasure' },
     AREA_MEASURE: { key: 'AREA_MEASURE', name: '面积量算', type: 'success', drawFunc: 'DrawGraphAreaMeasure' },

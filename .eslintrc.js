@@ -36,5 +36,6 @@ module.exports = {
                 multiline: 'never',
             },
         ],
+        '@typescript-eslint/semi': 'off',
     },
 };

@@ -125,9 +125,6 @@ export default class DrawGraphBase extends CreateTooltip {
         }
         // }
 
-        if (options.startPoint)
-            point.startPoint = true
-
         return point
     }
 

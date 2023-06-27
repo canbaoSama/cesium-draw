@@ -12,7 +12,6 @@ export interface DrawEntity extends Entity {
     layerId?: string
     objId?: number
     drawType?: string
-    startPoint?: boolean
 }
 
 export interface DrawCartesian3 extends Cartesian3 {
@@ -27,7 +26,6 @@ export interface createPointOpt {
     flag?: string
     needSave?: boolean // 是否需要保留
     label?: Object // 文案提示
-    startPoint?: boolean
 }
 
 export interface posInterface {
@@ -55,8 +53,6 @@ export interface WithSurface extends PublicOptions {
 
 // 绘制线条的options
 export interface LineOptions extends PublicOptions {
-    startPoint?: DrawCartesian3
-    rightEvent?: Function
     polylineWidth?: number
     material?: PolylineGlowMaterialProperty | Color | undefined
 }

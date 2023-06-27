@@ -32,7 +32,7 @@ export default defineConfig(() => {
             outDir: '../draw_ts_dist', // 指定输出路径
             assetsDir: 'assets', // 指定生成静态资源的存放路径
             lib: {
-                entry: resolve(__dirname, '../src/utils/drawGraph/index.ts'),
+                entry: resolve(__dirname, './npm.ts'),
                 name: 'draw-ts', // 全局变量的名称
                 fileName: 'draw-ts', // 输出文件的名字
             },

@@ -1,21 +1,24 @@
 {
     "name": "cesium-draw-ts",
-    "version": "1.0.2",
+    "version": "1.0.0",
     "description": "基于 cesium 绘制图形",
-    "main": "../src/utils/drawGraph/index.ts",
+    "main": "./npm.ts",
     "author": "billyang",
     "license": "ISC",
     "keywords": [
         "cesium",
         "draw",
         "ts",
+        "js",
+        "func",
         "cesium-draw",
-        "cesium-draw-ts"
+        "cesium-draw-ts",
+        "cesium-draw-js",
+        "cesium-draw-func"
     ],
     "files": [
-        "drawTs",
-        "package.json",
-        "README.md"
+        "draw_ts_dist",
+        "drawTs/README.md"
     ],
     "scripts": {
         "build": "vite build"
