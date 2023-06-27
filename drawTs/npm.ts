@@ -12,7 +12,7 @@ import DrawGraphSpaceDisMeasure from '@/utils/drawGraph/spaceDisMeasure'
 import DrawGraphStickDisMeasure from '@/utils/drawGraph/stickDisMeasure'
 import DrawGraphAreaMeasure from '@/utils/drawGraph/areaMeasure'
 
-import type {
+import {
     AreaMeasureOptions,
     AttactArrowOptions,
     BufferOptions,
@@ -29,20 +29,6 @@ import type {
 } from '@/types/cesiumDraw'
 
 export {
-    DrawGraphLine,
-    DrawGraphPolygon,
-    DrawGraphCircle,
-    DrawGraphStraightArrow,
-    DrawGraphBuffer,
-    DrawGraphRectangle,
-    DrawGraphAttactArrow,
-    DrawGraphPincerArrow,
-    DrawGraphPoint,
-    DrawGraphPosMeasure,
-    DrawGraphSpaceDisMeasure,
-    DrawGraphStickDisMeasure,
-    DrawGraphAreaMeasure,
-
     LineOptions,
     AreaMeasureOptions,
     AttactArrowOptions,
@@ -56,4 +42,19 @@ export {
     PosMeasureOptions,
     SpaceDisMeasureOptions,
     StickDisMeasureOptions,
+}
+export default {
+    DrawGraphLine,
+    DrawGraphPolygon,
+    DrawGraphCircle,
+    DrawGraphStraightArrow,
+    DrawGraphBuffer,
+    DrawGraphRectangle,
+    DrawGraphAttactArrow,
+    DrawGraphPincerArrow,
+    DrawGraphPoint,
+    DrawGraphPosMeasure,
+    DrawGraphSpaceDisMeasure,
+    DrawGraphStickDisMeasure,
+    DrawGraphAreaMeasure,
 }
