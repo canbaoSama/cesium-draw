@@ -16,9 +16,9 @@ dependencies:
   cesium:
     specifier: ^1.104.0
     version: 1.104.0
-  cesium-draw-vue:
-    specifier: ^1.0.2
-    version: 1.0.2(eslint@8.43.0)(postcss@8.4.24)(typescript@4.9.5)(vite@4.2.1)
+  cesium-draw-ts:
+    specifier: ^0.0.0
+    version: 0.0.0(vite@4.2.1)(vue@3.2.47)
   element-plus:
     specifier: ^2.3.3
     version: 2.3.3(vue@3.2.47)
@@ -1440,34 +1440,21 @@ packages:
       upper-case-first: 2.0.2
     dev: true
 
-  /cesium-draw-vue@1.0.2(eslint@8.43.0)(postcss@8.4.24)(typescript@4.9.5)(vite@4.2.1):
-    resolution: {integrity: sha512-4sQq0qA/UanpBUskYiaTNIYCROPe2t5CmClHjUgjZVSHOiHAPo8xtlDBRuyREppTVcUrQ/yGibhpn2lMMmtl2A==}
+  /cesium-draw-ts@0.0.0(vite@4.2.1)(vue@3.2.47):
+    resolution: {integrity: sha512-JfZPzOXRHXCBndxe8HIYpEBfHe+xqC8NviHWgOzWA78YGm+JrTmk1CLuPFGlNG9OVc9Lsd5C3Qhf2Rj4PXw5ug==}
     dependencies:
-      '@antfu/eslint-config': 0.38.4(eslint@8.43.0)(typescript@4.9.5)
       '@types/lodash-es': 4.17.7
       '@types/node': 18.15.11
       '@vueuse/core': 10.1.2(vue@3.2.47)
-      cesium: 1.104.0
-      element-plus: 2.3.3(vue@3.2.47)
       lodash-es: 4.17.21
       peerjs: 1.4.7
-      unocss: 0.53.0(postcss@8.4.24)(vite@4.2.1)
       vite-plugin-externals: 0.6.2(vite@4.2.1)
       vite-plugin-insert-html: 1.0.1(vite@4.2.1)
       vite-plugin-static-copy: 0.13.1(vite@4.2.1)
-      vue: 3.2.47
     transitivePeerDependencies:
-      - '@unocss/webpack'
       - '@vue/composition-api'
-      - eslint
-      - eslint-import-resolver-typescript
-      - eslint-import-resolver-webpack
-      - jest
-      - postcss
-      - rollup
-      - supports-color
-      - typescript
       - vite
+      - vue
     dev: false
 
   /cesium@1.104.0:

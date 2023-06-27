@@ -1,5 +1,5 @@
 <script setup lang="ts" name="App">
-import { DrawViewer } from 'cesium-draw-vue'
+import DrawViewer from '@/components/DrawViewer.vue'
 </script>
 
 <template>

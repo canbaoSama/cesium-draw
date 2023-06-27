@@ -1,8 +1,7 @@
 <script setup lang="ts" name="DrawViewer">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
+import { DrawGraphLine } from 'cesium-draw-ts/npm'
 
-import DrawGraph from '@/components/DrawGraph.vue'
-import MouseTooltip from '@/components/MouseTooltip.vue'
 import 'cesium/Build/CesiumUnminified/Widgets/widgets.css'
 import cesiumStore from '@/components/index'
 
@@ -10,6 +9,11 @@ onMounted(async () => {
     await cesiumStore.createViewer()
     // 地球贴图
     cesiumStore.addDefaultImageryProvider()
+
+    const drawGraph = ref()
+    setTimeout(() => {
+        drawGraph.value = new DrawGraphLine(cesiumStore.viewer, {})
+    }, 5000)
 })
 </script>
 
@@ -18,9 +22,7 @@ onMounted(async () => {
         <div id="viewerContainer" class="cesium-full-screen fixed wh-full overflow-hidden">
             <div id="toolbar" class="absolute z-99 left-8 top-5" />
         </div>
-        <MouseTooltip />
     </div>
-    <DrawGraph />
 </template>
 
 <style lang="less">
