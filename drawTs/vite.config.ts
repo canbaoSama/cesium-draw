@@ -29,7 +29,7 @@ export default defineConfig(() => {
             ],
         },
         build: {
-            outDir: '../draw_ts_dist', // 指定输出路径
+            outDir: 'dist', // 指定输出路径
             assetsDir: 'assets', // 指定生成静态资源的存放路径
             lib: {
                 entry: resolve(__dirname, './npm.ts'),

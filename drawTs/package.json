@@ -17,7 +17,7 @@
         "cesium-draw-func"
     ],
     "files": [
-        "../draw_ts_dist",
+        "dist",
         "README.md"
     ],
     "scripts": {
