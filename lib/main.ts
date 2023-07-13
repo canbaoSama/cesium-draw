@@ -18,7 +18,7 @@ export function add1() {
 }
 
 
-export {
+export const DrawFunc = {
     DrawGraphLine,
     DrawGraphPolygon,
     DrawGraphCircle,
