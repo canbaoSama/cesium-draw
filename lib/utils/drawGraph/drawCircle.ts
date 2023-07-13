@@ -7,7 +7,7 @@ import {
 import DrawGraphBase from './drawBase'
 import { FLAG_MAP } from './config'
 
-import type { CircleOptions, DrawCartesian3, DrawEntity } from './types'
+import type { CircleOptions, DrawCartesian3, DrawEntity } from '../../../index'
 
 import { DRAW_GRAPH_MAP } from './config'
 

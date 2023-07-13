@@ -8,7 +8,7 @@ import xp from './algorithm'
 import DrawGraphBase from './drawBase'
 import { FLAG_MAP } from './config'
 
-import type { DrawEntity, PincerArrowOptions } from './types'
+import type { DrawEntity, PincerArrowOptions } from '../../../index'
 
 import { DRAW_GRAPH_MAP } from './config'
 

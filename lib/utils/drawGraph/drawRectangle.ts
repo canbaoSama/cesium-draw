@@ -4,7 +4,7 @@ import { CallbackProperty, Cartesian3, Color, PolylineDashMaterialProperty, Rect
 import DrawGraphBase from './drawBase'
 import { FLAG_MAP } from './config'
 
-import type { DrawCartesian3, DrawEntity, RectangleOptions } from './types'
+import type { DrawCartesian3, DrawEntity, RectangleOptions } from '../../../index'
 
 import { DRAW_GRAPH_MAP } from './config'
 

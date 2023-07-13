@@ -4,7 +4,7 @@ import { CallbackProperty, Cartesian3, Color, PolygonGraphics, PolygonHierarchy,
 import DrawGraphBase from './drawBase'
 import { FLAG_MAP } from './config'
 
-import type { BufferOptions, DrawCartesian3, DrawEntity, configInterface } from './types'
+import type { BufferOptions, DrawCartesian3, DrawEntity, configInterface } from '../../../index'
 
 import { DRAW_GRAPH_MAP } from './config'
 

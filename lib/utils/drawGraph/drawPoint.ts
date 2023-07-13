@@ -4,7 +4,7 @@ import { Entity, ScreenSpaceEventHandler, ScreenSpaceEventType } from 'cesium'
 import DrawGraphBase from './drawBase'
 import { FLAG_MAP } from './config'
 
-import type { DrawCartesian3, DrawEntity, PointOptions } from './types'
+import type { DrawCartesian3, DrawEntity, PointOptions } from '../../../index'
 
 import { DRAW_GRAPH_MAP } from './config'
 

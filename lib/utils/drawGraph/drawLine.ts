@@ -4,7 +4,7 @@ import { CallbackProperty, Color, PolylineGlowMaterialProperty, ScreenSpaceEvent
 import DrawGraphBase from './drawBase'
 import { FLAG_MAP } from './config'
 
-import type { DrawCartesian3, DrawEntity, LineOptions } from './types'
+import type { DrawCartesian3, DrawEntity, LineOptions } from '../../../index'
 
 import { DRAW_GRAPH_MAP } from './config'
 

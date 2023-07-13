@@ -5,7 +5,7 @@ import DrawGraphBase from './drawBase'
 import { ENTITY_LABEL_DEFAULT_CONFIG, FLAG_MAP } from './config'
 
 import { DRAW_GRAPH_MAP } from './config'
-import type { DrawCartesian3, DrawEntity, PosMeasureOptions, posInterface } from './types'
+import type { DrawCartesian3, DrawEntity, PosMeasureOptions, posInterface } from '../../../index'
 
 export default class DrawGraphPosMeasure extends DrawGraphBase {
     viewer: Viewer

@@ -8,7 +8,7 @@ import { drawConfig } from './index'
 
 import { DRAW_GRAPH_MAP } from './config'
 import { radToDeg } from '../common'
-import type { DrawCartesian3, DrawEntity, createPointOpt, posInterface } from './types'
+import type { DrawCartesian3, DrawEntity, createPointOpt, posInterface } from '../../../index'
 import { CreateTooltip } from '../tooltip'
 
 export default class DrawGraphBase extends CreateTooltip {

@@ -5,7 +5,7 @@ import { FLAG_MAP } from './config'
 
 import DrawGraphBase from './drawBase'
 
-import type { DrawCartesian3, DrawEntity, PolygonOptions } from './types'
+import type { DrawCartesian3, DrawEntity, PolygonOptions } from '../../../index'
 
 import { DRAW_GRAPH_MAP } from './config'
 

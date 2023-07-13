@@ -5,7 +5,7 @@ import DrawGraphBase from './drawBase'
 import { ENTITY_LABEL_DEFAULT_CONFIG, FLAG_MAP } from './config'
 
 import { DRAW_GRAPH_MAP } from './config'
-import type { DrawCartesian3, DrawEntity, SpaceDisMeasureOptions } from './types'
+import type { DrawCartesian3, DrawEntity, SpaceDisMeasureOptions } from '../../../index'
 
 export default class DrawGraphSpaceDisMeasure extends DrawGraphBase {
     viewer: Viewer

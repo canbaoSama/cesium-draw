@@ -1,6 +1,6 @@
 {
     "name": "cesium-draw-js",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "type": "module",
     "files": [
         "dist",
@@ -23,6 +23,7 @@
         "vite": "^4.3.9"
     },
     "dependencies": {
+        "@types/lodash-es": "^4.17.7",
         "cesium": "^1.107.0",
         "lodash-es": "^4.17.21",
         "vite-plugin-static-copy": "^0.16.0"

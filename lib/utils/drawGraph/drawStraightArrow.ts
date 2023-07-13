@@ -8,7 +8,7 @@ import xp from './algorithm'
 import DrawGraphBase from './drawBase'
 import { FLAG_MAP } from './config'
 
-import type { DrawCartesian3, DrawEntity, StraightArrowOptions } from './types'
+import type { DrawCartesian3, DrawEntity, StraightArrowOptions } from '../../../index'
 
 import { DRAW_GRAPH_MAP } from './config'
 
