@@ -14,7 +14,7 @@ import DrawGraphLine from './utils/drawGraph/drawLine'
 import DrawGraphCircle from './utils/drawGraph/drawCircle'
 import DrawGraphPolygon from './utils/drawGraph/drawPolygon'
 
-export const DrawFunc = {
+export {
     DrawGraphLine,
     DrawGraphPolygon,
     DrawGraphCircle,
