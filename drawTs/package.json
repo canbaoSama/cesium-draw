@@ -1,6 +1,6 @@
 {
     "name": "cesium-draw-ts",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "基于 cesium 绘制图形",
     "main": "./npm.ts",
     "author": "billyang",
@@ -19,7 +19,8 @@
     "files": [
         "./dist",
         "./README.md",
-        "./package.json"
+        "./package.json",
+        "../src/utils"
     ],
     "scripts": {
         "build": "vite build"
