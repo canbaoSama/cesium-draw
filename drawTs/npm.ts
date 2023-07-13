@@ -12,37 +12,37 @@ import DrawGraphSpaceDisMeasure from '@/utils/drawGraph/spaceDisMeasure'
 import DrawGraphStickDisMeasure from '@/utils/drawGraph/stickDisMeasure'
 import DrawGraphAreaMeasure from '@/utils/drawGraph/areaMeasure'
 
-import {
-    AreaMeasureOptions,
-    AttactArrowOptions,
-    BufferOptions,
-    CircleOptions,
-    LineOptions,
-    PincerArrowOptions,
-    PointOptions,
-    PolygonOptions,
-    PosMeasureOptions,
-    RectangleOptions,
-    SpaceDisMeasureOptions,
-    StickDisMeasureOptions,
-    StraightArrowOptions,
-} from '@/types/cesiumDraw'
+// import {
+//     AreaMeasureOptions,
+//     AttactArrowOptions,
+//     BufferOptions,
+//     CircleOptions,
+//     LineOptions,
+//     PincerArrowOptions,
+//     PointOptions,
+//     PolygonOptions,
+//     PosMeasureOptions,
+//     RectangleOptions,
+//     SpaceDisMeasureOptions,
+//     StickDisMeasureOptions,
+//     StraightArrowOptions,
+// } from '@/types/cesiumDraw'
 
-export {
-    LineOptions,
-    AreaMeasureOptions,
-    AttactArrowOptions,
-    BufferOptions,
-    CircleOptions,
-    PincerArrowOptions,
-    PointOptions,
-    PolygonOptions,
-    RectangleOptions,
-    StraightArrowOptions,
-    PosMeasureOptions,
-    SpaceDisMeasureOptions,
-    StickDisMeasureOptions,
-}
+// export {
+//     LineOptions,
+//     AreaMeasureOptions,
+//     AttactArrowOptions,
+//     BufferOptions,
+//     CircleOptions,
+//     PincerArrowOptions,
+//     PointOptions,
+//     PolygonOptions,
+//     RectangleOptions,
+//     StraightArrowOptions,
+//     PosMeasureOptions,
+//     SpaceDisMeasureOptions,
+//     StickDisMeasureOptions,
+// }
 export default {
     DrawGraphLine,
     DrawGraphPolygon,

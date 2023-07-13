@@ -1,6 +1,7 @@
 <script setup lang="ts" name="DrawViewer">
 import { onMounted, ref } from 'vue'
-import { DrawGraphLine } from 'cesium-draw-ts'
+
+import { DrawGraphLine } from '@/drawTs/draw-ts.mjs'
 
 import 'cesium/Build/CesiumUnminified/Widgets/widgets.css'
 import cesiumStore from '@/components/index'
