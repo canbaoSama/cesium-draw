@@ -1,33 +1,23 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "@/*": [
-                "./src/*"
-            ]
-        },
-        "target": "esnext",
-        "useDefineForClassFields": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "strict": true,
-        "jsx": "preserve",
-        "sourceMap": true,
-        "resolveJsonModule": true,
-        "esModuleInterop": true,
-        "lib": [
-            "esnext",
-            "dom"
-        ],
-        "noUnusedLocals": true,
-    },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.d.ts",
-        "src/**/*.tsx",
-        "src/**/*.vue",
-        "src/utils/axios.ts",
-        "src/assets/Sandcastle-header.js",
-        "drawTs"
-    ]
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"]
 }
