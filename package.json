@@ -1,6 +1,6 @@
 {
     "name": "cesium-draw-js",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "type": "module",
     "files": [
         "dist",
@@ -27,7 +27,6 @@
         "@types/lodash-es": "^4.17.7",
         "cesium": "^1.107.0",
         "lodash-es": "^4.17.21",
-        "mini-css-extract-plugin": "^2.7.6",
         "vite-plugin-static-copy": "^0.16.0"
     }
 }

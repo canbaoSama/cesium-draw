@@ -6,6 +6,11 @@ export default defineConfig({
             entry: './lib/main.ts',
             name: 'cesium.draw',
             fileName: 'cesium.draw'
+        },
+        commonjsOptions: {
+            include: []
         }
-    }
+    },
+    optimizeDeps: { disabled: false }
+
 })
