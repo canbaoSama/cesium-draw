@@ -1,15 +1,29 @@
-import { Cartesian3, ConstantProperty, EllipsoidGeodesic, HeightReference, defined } from 'cesium'
-import type { Color, PolylineDashMaterialProperty, PolylineGlowMaterialProperty, ScreenSpaceEventHandler, Viewer } from 'cesium'
+import { Cartesian3, ConstantProperty, EllipsoidGeodesic, HeightReference, defined, Color } from 'cesium'
+import type { PolylineDashMaterialProperty, PolylineGlowMaterialProperty, ScreenSpaceEventHandler, Viewer } from 'cesium'
 import { cloneDeep } from 'lodash-es'
 
 import { FLAG_MAP, SAVE_NEED_UPDATE_POSITION, UNSAVE_DRAW_TYPE } from './config'
 
-import { drawConfig } from './index'
 
 import { DRAW_GRAPH_MAP } from './config'
 import { radToDeg } from '../common'
 import type { DrawCartesian3, DrawEntity, createPointOpt, posInterface } from '../../../index'
 import { CreateTooltip } from '../tooltip'
+
+const drawConfig = {
+    layerId: 'globeDrawerLayer',
+    dragIconLight: '/src/assets/images/circle_point_icon.svg', // 绘制时的红点
+    dragIcon: '/src/assets/images/point_icon.svg', // 绘制时的灰点
+    fill: true,
+    outline: true,
+    outlineWidth: 2,
+    outlineColor: Color.YELLOW,
+    extrudedHeight: 0,
+    polylineWidth: 8,
+    radius: 1,
+    line: true,
+    lineWidth: 2,
+}
 
 export default class DrawGraphBase extends CreateTooltip {
     viewer: Viewer

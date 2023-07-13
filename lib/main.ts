@@ -18,18 +18,18 @@ export function add1() {
 }
 
 
-export const DrawFunc = {
-    DrawGraphLine: DrawGraphLine,
-    DrawGraphPolygon: DrawGraphPolygon,
-    DrawGraphCircle: DrawGraphCircle,
-    DrawGraphStraightArrow: DrawGraphStraightArrow,
-    DrawGraphBuffer: DrawGraphBuffer,
-    DrawGraphRectangle: DrawGraphRectangle,
-    DrawGraphAttactArrow: DrawGraphAttactArrow,
-    DrawGraphPincerArrow: DrawGraphPincerArrow,
-    DrawGraphPoint: DrawGraphPoint,
-    DrawGraphPosMeasure: DrawGraphPosMeasure,
-    DrawGraphSpaceDisMeasure: DrawGraphSpaceDisMeasure,
-    DrawGraphStickDisMeasure: DrawGraphStickDisMeasure,
-    DrawGraphAreaMeasure: DrawGraphAreaMeasure,
+export {
+    DrawGraphLine,
+    DrawGraphPolygon,
+    DrawGraphCircle,
+    DrawGraphStraightArrow,
+    DrawGraphBuffer,
+    DrawGraphRectangle,
+    DrawGraphAttactArrow,
+    DrawGraphPincerArrow,
+    DrawGraphPoint,
+    DrawGraphPosMeasure,
+    DrawGraphSpaceDisMeasure,
+    DrawGraphStickDisMeasure,
+    DrawGraphAreaMeasure,
 }
