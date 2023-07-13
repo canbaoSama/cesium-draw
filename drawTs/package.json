@@ -17,8 +17,9 @@
         "cesium-draw-func"
     ],
     "files": [
-        "dist",
-        "README.md"
+        "./dist",
+        "./README.md",
+        "./package.json"
     ],
     "scripts": {
         "build": "vite build"

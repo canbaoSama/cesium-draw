@@ -44,7 +44,7 @@ import DrawGraphAreaMeasure from '../src/utils/drawGraph/areaMeasure'
 //     SpaceDisMeasureOptions,
 //     StickDisMeasureOptions,
 // }
-export default {
+export const DrawFunc = {
     DrawGraphLine,
     DrawGraphPolygon,
     DrawGraphCircle,
