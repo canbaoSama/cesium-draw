@@ -21,7 +21,8 @@
         "./README.md"
     ],
     "scripts": {
-        "build": "vite build"
+        "build": "vite build",
+        "lib": "vite build --target lib ./npm.js"
     },
     "dependencies": {
         "@types/lodash-es": "^4.17.7",

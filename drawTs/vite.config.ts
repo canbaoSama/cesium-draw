@@ -37,6 +37,7 @@ export default defineConfig(() => {
                 fileName: 'cesium-draw-ts', // 输出文件的名字
             },
             rollupOptions: {
+                input: './npm.ts',
                 // 确保外部化处理那些你不想打包进库的依赖
                 external: ['vue'],
                 output: {
