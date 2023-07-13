@@ -12,19 +12,24 @@ import DrawGraphLine from './utils/drawGraph/drawLine'
 import DrawGraphCircle from './utils/drawGraph/drawCircle'
 import DrawGraphPolygon from './utils/drawGraph/drawPolygon'
 
+let init = 1;
+export function add1() {
+    console.log(init++)
+}
+
 
 export const DrawFunc = {
-    DrawGraphLine,
-    DrawGraphPolygon,
-    DrawGraphCircle,
-    DrawGraphStraightArrow,
-    DrawGraphBuffer,
-    DrawGraphRectangle,
-    DrawGraphAttactArrow,
-    DrawGraphPincerArrow,
-    DrawGraphPoint,
-    DrawGraphPosMeasure,
-    DrawGraphSpaceDisMeasure,
-    DrawGraphStickDisMeasure,
-    DrawGraphAreaMeasure,
+    DrawGraphLine: DrawGraphLine,
+    DrawGraphPolygon: DrawGraphPolygon,
+    DrawGraphCircle: DrawGraphCircle,
+    DrawGraphStraightArrow: DrawGraphStraightArrow,
+    DrawGraphBuffer: DrawGraphBuffer,
+    DrawGraphRectangle: DrawGraphRectangle,
+    DrawGraphAttactArrow: DrawGraphAttactArrow,
+    DrawGraphPincerArrow: DrawGraphPincerArrow,
+    DrawGraphPoint: DrawGraphPoint,
+    DrawGraphPosMeasure: DrawGraphPosMeasure,
+    DrawGraphSpaceDisMeasure: DrawGraphSpaceDisMeasure,
+    DrawGraphStickDisMeasure: DrawGraphStickDisMeasure,
+    DrawGraphAreaMeasure: DrawGraphAreaMeasure,
 }

@@ -112,4 +112,5 @@ export interface StickDisMeasureOptions extends PublicOptions {
     material?: PolylineGlowMaterialProperty | Color | undefined
 }
 
-export const DrawFunc: void
+export const DrawFunc
+export function add1(): void
