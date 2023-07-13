@@ -1,18 +1,18 @@
 {
     "name": "cesium-draw-js",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "type": "module",
     "files": [
         "dist",
         "index.d.ts"
     ],
-    "main": "./dist/cesium-draw.umd.cjs",
-    "module": "./dist/cesium-draw.js",
+    "main": "./dist/cesium.draw.umd.cjs",
+    "module": "./dist/cesium.draw.js",
     "types": "./index.d.ts",
     "exports": {
         "types": "./index.d.ts",
-        "import": "./dist/cesium-draw.js",
-        "require": "./dist/cesium-draw.umd.cjs"
+        "import": "./dist/cesium.draw.js",
+        "require": "./dist/cesium.draw.umd.cjs"
     },
     "scripts": {
         "dev": "vite",
