@@ -1,7 +1,7 @@
 <script setup lang="ts" name="DrawViewer">
 import { onMounted, ref } from 'vue'
 
-import { DrawGraphLine } from '@/drawTs/draw-ts.mjs'
+import { DrawGraphPolygon } from 'cesium-draw-ts'
 
 import 'cesium/Build/CesiumUnminified/Widgets/widgets.css'
 import cesiumStore from '@/components/index'
@@ -13,7 +13,7 @@ onMounted(async () => {
 
     const drawGraph = ref()
     setTimeout(() => {
-        drawGraph.value = new DrawGraphLine(cesiumStore.viewer, {})
+        drawGraph.value = new DrawGraphPolygon(cesiumStore.viewer, {})
     }, 5000)
 })
 </script>

@@ -1,8 +1,9 @@
 import type { Viewer } from 'cesium'
 import { CallbackProperty, Color, PolygonGraphics, PolygonHierarchy, PolylineDashMaterialProperty, ScreenSpaceEventHandler, ScreenSpaceEventType } from 'cesium'
 
-import DrawGraphBase from './drawBase'
 import { FLAG_MAP } from './config'
+
+import DrawGraphBase from '@/utils/drawGraph/drawBase'
 
 import type { DrawCartesian3, DrawEntity, PolygonOptions } from '@/types/cesiumDraw'
 
