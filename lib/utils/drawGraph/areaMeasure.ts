@@ -8,7 +8,7 @@ import DrawGraphBase from './drawBase'
 import { ENTITY_LABEL_DEFAULT_CONFIG, FLAG_MAP } from './config'
 
 import { DRAW_GRAPH_MAP } from './config'
-import type { AreaMeasureOptions, DrawCartesian3, DrawEntity } from './types'
+import type { AreaMeasureOptions, DrawCartesian3, DrawEntity } from '../../../index'
 
 export default class DrawGraphAreaMeasure extends DrawGraphBase {
     viewer: Viewer
