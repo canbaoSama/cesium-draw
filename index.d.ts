@@ -1,19 +1,4 @@
 import type { Viewer, Cartesian3, Color, Entity, PolylineDashMaterialProperty, PolylineGlowMaterialProperty } from 'cesium'
-import {
-    DrawGraphLine,
-    DrawGraphPolygon,
-    DrawGraphCircle,
-    DrawGraphStraightArrow,
-    DrawGraphBuffer,
-    DrawGraphRectangle,
-    DrawGraphAttactArrow,
-    DrawGraphPincerArrow,
-    DrawGraphPoint,
-    DrawGraphPosMeasure,
-    DrawGraphSpaceDisMeasure,
-    DrawGraphStickDisMeasure,
-    DrawGraphAreaMeasure,
-} from './lib/main'
 
 export interface configInterface {
     radius: number
@@ -127,19 +112,4 @@ export interface StickDisMeasureOptions extends PublicOptions {
     material?: PolylineGlowMaterialProperty | Color | undefined
 }
 
-
-export {
-    DrawGraphLine,
-    DrawGraphPolygon,
-    DrawGraphCircle,
-    DrawGraphStraightArrow,
-    DrawGraphBuffer,
-    DrawGraphRectangle,
-    DrawGraphAttactArrow,
-    DrawGraphPincerArrow,
-    DrawGraphPoint,
-    DrawGraphPosMeasure,
-    DrawGraphSpaceDisMeasure,
-    DrawGraphStickDisMeasure,
-    DrawGraphAreaMeasure,
-}
+export const DrawFunc

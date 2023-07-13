@@ -7,10 +7,5 @@ export default defineConfig({
             name: 'cesium.draw',
             fileName: 'cesium.draw'
         },
-        commonjsOptions: {
-            include: []
-        }
     },
-    optimizeDeps: { disabled: false }
-
 })

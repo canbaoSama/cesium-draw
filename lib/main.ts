@@ -8,13 +8,12 @@ import DrawGraphPosMeasure from './utils/drawGraph/posMeasure'
 import DrawGraphSpaceDisMeasure from './utils/drawGraph/spaceDisMeasure'
 import DrawGraphStickDisMeasure from './utils/drawGraph/stickDisMeasure'
 import DrawGraphAreaMeasure from './utils/drawGraph/areaMeasure'
-
 import DrawGraphLine from './utils/drawGraph/drawLine'
-
 import DrawGraphCircle from './utils/drawGraph/drawCircle'
 import DrawGraphPolygon from './utils/drawGraph/drawPolygon'
 
-export {
+
+export const DrawFunc = {
     DrawGraphLine,
     DrawGraphPolygon,
     DrawGraphCircle,
