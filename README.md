@@ -4,7 +4,7 @@
 
 基础图形如下图，坐标查询，空间距离，贴地距离和面积量算等实时计算功能不保存图形数据
 
-![Description](https://github.com/canbaoSama/cesium-draw/public/cesium-draw.png)
+![Description](https://github.com/canbaoSama/cesium-draw/blob/main/public/cesium-draw.png?raw=true)
 
 ### 使用如下
 
