@@ -33,8 +33,8 @@ export default defineConfig(() => {
             assetsDir: 'assets', // 指定生成静态资源的存放路径
             lib: {
                 entry: resolve(__dirname, './npm.ts'),
-                name: 'draw-ts', // 全局变量的名称
-                fileName: 'draw-ts', // 输出文件的名字
+                name: 'cesium-draw-ts', // 全局变量的名称
+                fileName: 'cesium-draw-ts', // 输出文件的名字
             },
             rollupOptions: {
                 // 确保外部化处理那些你不想打包进库的依赖

@@ -1,8 +1,8 @@
 {
     "name": "cesium-draw-ts",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "基于 cesium 绘制图形",
-    "main": "./npm.ts",
+    "main": "./dist/cesium-draw-ts.umd.js",
     "author": "billyang",
     "license": "ISC",
     "keywords": [
@@ -18,9 +18,7 @@
     ],
     "files": [
         "./dist",
-        "./README.md",
-        "./package.json",
-        "../src/utils"
+        "./README.md"
     ],
     "scripts": {
         "build": "vite build"
