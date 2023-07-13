@@ -4,21 +4,24 @@
 
 基础图形如下图，坐标查询，空间距离，贴地距离和面积量算等实时计算功能不保存图形数据
 
-![Description](https://github.com/canbaoSama/cesium-draw/tree/main/src/assets/images/cesium-draw.png)
+![Description](https://github.com/canbaoSama/cesium-draw/public/cesium-draw.png)
 
 ### 使用如下
 
-1. 安装 cesium-draw-ts 包
+1. 安装 cesium-draw-js 包
 
 ```bash
-npm i cesium-draw-ts
+npm i cesium-draw-js
 ```
 
-2. 引入 tooltip
+2. 引入 tooltip 和 确认取消弹框
    绘制时添加的操作提示需要在页面中添加如下 dom
 
 ```html
+<!-- 绘制时的提示框，内部样式自己定义 -->
 <div id="mouse-tooltip" />
+<!-- 绘制停止时的确认取消框，样式自己定义，确认和取消方法引用参考第7点 -->
+<div id="drawPopConfirmLayer" />
 ```
 
 3. 引入 turf.min.js 文件
@@ -27,7 +30,7 @@ npm i cesium-draw-ts
 ```html
 <script
     type="text/javascript"
-    src="/node_modules/cesium-draw-vue/turf.min.js"
+    src="/node_modules/cesium-draw-js/dist/turf.min.js"
 ></script>
 ```
 
@@ -35,12 +38,12 @@ npm i cesium-draw-ts
    以绘制折线为例,执行以下代码就可以在你的 cesium 地图上开始绘制你的线条了
 
 ```ts
-import { DrawGraphLine } from 'cesium-draw-ts';
-import type { LineOptions } from 'cesium-draw-ts';
+import { DrawFunc } from 'cesium-draw-js';
+import type { LineOptions } from 'cesium-draw-js';
 
 const viewer: Viewer = undefined; //  自己的 cesium.viewer
 const options: LineOptions = {}; // 参数配置,可以更改线条的宽度,材料等
-const drawGraph = new DrawGraphLine(viewer, options);
+const drawGraph = new DrawFunc.DrawGraphLine(viewer, options);
 drawGraph.startDraw();
 ```
 

@@ -113,4 +113,3 @@ export interface StickDisMeasureOptions extends PublicOptions {
 }
 
 export const DrawFunc
-export function add1(): void

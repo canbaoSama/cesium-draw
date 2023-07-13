@@ -1,7 +1,22 @@
 {
     "name": "cesium-draw-js",
-    "version": "0.0.12",
+    "version": "1.0.0",
     "type": "module",
+    "author": "billyang",
+    "license": "ISC",
+    "keywords": [
+        "cesium",
+        "draw",
+        "ts",
+        "js",
+        "cesium-draw",
+        "cesium-draw-ts",
+        "cesium-draw-js"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/canbaoSama/cesium-draw"
+    },
     "files": [
         "dist",
         "index.d.ts"

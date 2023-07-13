@@ -12,12 +12,6 @@ import DrawGraphLine from './utils/drawGraph/drawLine'
 import DrawGraphCircle from './utils/drawGraph/drawCircle'
 import DrawGraphPolygon from './utils/drawGraph/drawPolygon'
 
-let init = 1;
-export function add1() {
-    console.log(init++)
-}
-
-
 export const DrawFunc = {
     DrawGraphLine,
     DrawGraphPolygon,
