@@ -15,7 +15,8 @@ npm i cesium-draw-js
 ```
 
 2. 引入 tooltip 和 确认取消弹框
-   绘制时添加的操作提示需要在页面中添加如下 dom
+
+绘制时添加的操作提示需要在页面中添加如下 dom
 
 ```html
 <!-- 绘制时的提示框，内部样式自己定义 -->
@@ -25,7 +26,8 @@ npm i cesium-draw-js
 ```
 
 3. 引入 turf.min.js 文件
-   缓冲区和面积量算需要引入 turf.min.js 文件,如果不用到这两个绘制功能，不需要引入
+
+缓冲区和面积量算需要引入 turf.min.js 文件,如果不用到这两个绘制功能，不需要引入
 
 ```html
 <script
@@ -35,7 +37,8 @@ npm i cesium-draw-js
 ```
 
 4. 引入绘制方法
-   以绘制折线为例,执行以下代码就可以在你的 cesium 地图上开始绘制你的线条了
+
+以绘制折线为例,执行以下代码就可以在你的 cesium 地图上开始绘制你的线条了
 
 ```ts
 import { DrawFunc } from 'cesium-draw-js';
@@ -49,7 +52,7 @@ drawGraph.startDraw();
 
 5. 所有绘制方法的 options 参数
 
-    所有绘制方法 options 参数都有 3 个公共参数,分别为 layerId、dragIconLight 和 dragIcon
+所有绘制方法 options 参数都有 3 个公共参数,分别为 layerId、dragIconLight 和 dragIcon
 
     |                          |          | options                                                                                             |
     | ------------------------ | -------- | --------------------------------------------------------------------------------------------------- |
@@ -102,4 +105,50 @@ drawGraph.startDraw();
 
 ### 编辑和删除
 
-编辑和删除通过暴露的方法就可以实现，根据个人情况开发，可以参考[我的实现方式](https://github.com/canbaoSama/cesium-draw/blob/main/src/components/DrawGraph.vue)
+编辑和删除通过暴露的方法就可以实现，根据个人情况开发，可以参考下面的写法
+
+```js
+/**
+ * let layerId = 'xxx' //你自己设定的layerId
+ * let viewer = new Viewer() // viewer 是你的 cesium 上的 viewer 应用
+ * let drawGraph = new DrawGraphLine(viewer,{})  // drawGraph 是你的绘制 class
+ */
+// 给绘制的图形绑定点击事件
+function bindGloveEvent() {
+    handler = new ScreenSpaceEventHandler(viewer.scene.canvas)
+    handler.setInputAction((movement: any) => {
+        const pick = viewer.scene.pick(movement.position)
+        if (defined(pick)) {
+            const obj = pick?.id
+            if (!obj || !obj.layerId || flag.value === OPERATE_STATUS.NONE)
+                return
+
+            if (flag.value === OPERATE_STATUS.EDIT) // 编辑状态
+                enterDrawEditing(obj.timeStampId, obj.drawType)
+            else if (flag.value === OPERATE_STATUS.DELETE) // 删除状态
+                clearEntityById(obj.timeStampId)
+        }
+    }, ScreenSpaceEventType.LEFT_CLICK)
+}
+function clearEntityById(timeStampId: number) {
+    const entityList = viewer.entities.values
+    if (!entityList || entityList.length < 1)
+        return
+
+    for (let i = 0; i < entityList.length; i++) {
+        const entity: DrawEntity = entityList[i]
+        if (entity.layerId === layerId && entity.timeStampId === timeStampId) {
+            viewer.entities.remove(entity)
+            i--
+        }
+    }
+}
+function enterDrawEditing(timeStampId: number, drawType: string) {
+    // 先移除entity
+    clearEntityById(timeStampId)
+    drawGraph?.reEnterModify(drawedShape[timeStampId], timeStampId)
+}
+```
+
+### 参考实现页面
+[我写了一个Vue页面，可以参考内部的引用和实现方式](https://github.com/canbaoSama/cesium-draw/tree/main/src/DrawGraph.vue)
